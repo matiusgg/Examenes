@@ -1,0 +1,22 @@
+{
+    "name": "mateoGG/ExamenFinalM2",
+    "description": "",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "MateoGG",
+            "email": "newpowerexperience2016@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "models\\" : "models/"
+        }
+    },
+
+
+    "require": {
+        "phpmailer/phpmailer": "^6.0"
+    }
+}
