@@ -55,7 +55,10 @@ $infractor-> verTuplas('infractor');
 
 <?php
 
-echo('<a href="mensajeConsulta.php?tipoMultas=' . $_POST['tipoMultas'] . '&nombreCompleto=' . $_POST['nombreCompleto'] . '&"> TRAMITAR CONSULTA AL INFRACTOR</a>');
+
+$inputNombre = $_POST['nombrecompleto'];
+
+echo('<a href="mensajeConsulta.php?tipoMultas=' . $inputMulta . '&nombrecompleto=' . $inputNombre . '&placacoche=' . $_POST['placacoche'] . '&dniformulario=' . $inputDNI . '"> TRAMITAR CONSULTA AL INFRACTOR</a>');
 
 ?>
     </article>

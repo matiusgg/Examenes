@@ -47,9 +47,6 @@ if( !empty($_POST['tramitepago'])) {
 
 <input type="submit" name="multar" class="formulario__inbox_botonmultar" value="MULTAR">
 
-<!-- Input enviar tramitarpago -->
-
-<input type="submit" name="tramitepago" class="formulario__inbox_botontramitepago" value="TRAMITAR PAGO">
 
 
     </article>

@@ -8,7 +8,7 @@ use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 // Instantiation and passing `true` enables exceptions
 
-if(!empty($_POST['nombre'] && $_POST['email'] && $_POST['mensaje'])){
+if(!empty($_REQUEST)){
 
 
 
@@ -26,10 +26,10 @@ try {
     $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
     $mail->Port       = 587;                                    // TCP port to connect to
     //Recipients
-    $mail->setFrom($_POST['email']);
-    $mail->addAddress($_POST['email'], 'MAtSTark');     // Add a recipient
+    $mail->setFrom($_POST['emailde']);
+    $mail->addAddress($_POST['emailpara'], 'MAtSTark');     // Add a recipient
     //$mail->addAddress('ellen@example.com');               // Name is optional
-    $mail->addReplyTo($_POST['email'], 'SE HA ENVIADO CORRECTAMENTE EL MENSAJE');
+    $mail->addReplyTo($_POST['emailpara'], 'SE HA ENVIADO CORRECTAMENTE EL MENSAJE');
     //$mail->addCC('cc@example.com');
     //$mail->addBCC('bcc@example.com');
     // Attachments
@@ -38,14 +38,14 @@ try {
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
     $mail->Subject = 'Tema del mensaje';
-    $mail->Body    =  $_POST['mensaje']; 
+    $mail->Body    =  $_POST['asunto'] . $_POST['fechapago']; 
     // echo<pre>
     // enviado desde: $_POST[email];
     // nombre: $_POST[nombre]; 
     // mensaje: $_POST[mensaje];  
     // echo</pre>";
    
-    $mail->AltBody = $_POST['mensaje'];
+    $mail->AltBody = $_POST['asunto'] . $_POST['fechapago']; 
     $mail->send();
     echo 'El mensaje ha sido enviado correctamente';
 } catch (Exception $e) {

@@ -177,6 +177,61 @@ if($nombretabla == 'infractor') {
 
 }
 
+public function MostrarPrecioMulta($nombretabla) {
+
+    $leer = $this->conexion->query("select * from $nombretabla;");
+
+
+
+echo('<pre>');
+print_r($leer);
+echo('</pre>');
+
+
+foreach($leer AS $valor) {
+
+
+
+if($nombretabla == 'infractor') {
+
+    if($valor['tipoMultas'] == 'mal_estacionado') {
+
+// if()
+        echo 'PRECIO DE LA MULTA DE ESTE TIPO: 50 EUROS';
+    }
+
+    if($valor['tipoMultas'] == 'choque_leve_a_otro_individuo') {
+
+        echo 'PRECIO DE LA MULTA DE ESTE TIPO: 150 EUROS';
+    }
+
+    if($valor['tipoMultas'] == 'maxima_velocidad_superada') {
+
+        echo 'PRECIO DE LA MULTA DE ESTE TIPO: 80 EUROS';
+    }
+
+    if($valor['tipoMultas'] == 'agresion_a_personal_del_transito') {
+
+        echo 'PRECIO DE LA MULTA DE ESTE TIPO: 350 EUROS';
+    }
+
+    if($valor['tipoMultas'] == 'Desorden_publico') {
+
+        echo 'PRECIO DE LA MULTA DE ESTE TIPO: 60 EUROS';
+    }
+
+    if($valor['tipoMultas'] == 'Incumplimiento_señales_transito') {
+
+        echo 'PRECIO DE LA MULTA DE ESTE TIPO: 100 EUROS';
+    }
+
+
+
+}
+}
+
+}
+
 
 
 

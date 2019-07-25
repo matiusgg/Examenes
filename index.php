@@ -13,6 +13,7 @@ if(!empty($_POST['dni'])) {
 }
 
 
+
 ?>
 <!-- HTML5 --> 
 <!DOCTYPE html>
@@ -62,5 +63,7 @@ if(!empty($_POST['dni'])) {
 
 </body>
 </html>
+
+
 
 
