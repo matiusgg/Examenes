@@ -1,0 +1,10 @@
+
+body {
+
+    display: flex;
+}
+.productos_LiquidosPostres{
+
+    display: inline-block;
+    background-color: brown;
+}

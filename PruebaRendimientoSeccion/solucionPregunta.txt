@@ -1,0 +1,2 @@
+La diferencia es que Las BD NOSQL estan dirigidas principalmente a obejtivos especificos, es decir,
+SE EMPLEAN PARA CUESTIONES O NECESIDADES CONCRETAS. Ademas: EXISTEN MAS TIPOS DE ESTAS BD NOSQL A DIREFENCIA DE LAS RELACIONALES.

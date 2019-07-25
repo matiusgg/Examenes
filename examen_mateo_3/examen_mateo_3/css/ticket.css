@@ -1,0 +1,45 @@
+
+body{
+
+    justify-content: center;
+}
+
+
+
+header{
+
+    display: flex;
+ 
+    /* justify-content: space-between; /* Esto nos permite que halla un espacio entre los contenidos */
+   
+
+
+}
+
+header h2{
+
+    display: flex;
+}
+
+
+
+
+
+section.contenidoproducto article{
+    display: flex;
+}
+
+section.contenidoproducto article span{
+    flex-grow: 1;
+}
+
+section.contenidoproducto article span:nth-child(1){
+
+    flex-grow: 5;
+}
+
+
+
+
+
+  

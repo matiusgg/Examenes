@@ -1,0 +1,10 @@
+div.contenedorgeneral {
+
+    box-sizing: border-box;
+    justify-content: center;
+    display: flex;
+    align-content: center;
+
+
+    
+}
