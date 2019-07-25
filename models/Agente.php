@@ -19,6 +19,7 @@ class Agente{
     private $nss;
     private $zonaAsignada;
     private $nacionalidad;
+    private $tipoMultas;
 
 
     // CONSTRUCTOR
