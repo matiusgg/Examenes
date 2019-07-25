@@ -129,9 +129,9 @@ if($nombretabla == 'infractor') {
 
     public function dniAcceso($nombretabla) {
 
-        $dniTabla = $this->conexion->query("select dni from $nombretabla");
+        $dniInfractor = $this->conexion->query("select dni from $nombretabla");
 
-        foreach($dniTabla AS $valor) {
+        foreach($dniInfractor AS $valor) {
 
             $dni = $valor['dni'];
 

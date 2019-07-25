@@ -1,20 +1,17 @@
-
 <?php
-if( !empty($_POST['multar'])) {
+require_once '../vendor/autoload.php';
+use models\{Conexion, Infractor};
+
+// echo('<pre>');
+// print_r($_REQUEST);
+// echo('</pre>');
 
 
-    header('Location: formularioMultar.php');
-}
 
-if( !empty($_POST['insertarInfractor'])) {
-
-
-    header('Location: insertarInfractor.php');
-}
+$infractor = new Infractor('localhost', 'root', '', 'multasagentes');
 
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,34 +28,43 @@ if( !empty($_POST['insertarInfractor'])) {
 
 <body>
 
-<form action="opciones.php" method="post">
-
 <!-- HEADER -->
     <header>
-        <h1>
-        ESCOGE ENTRE LAS OPCIONES
-        </h1>
+        
     </header>
 
 <!-- SECTION -->
 <section>
     <article>
-    <!-- Input enviar multar -->
-
-<input type="submit" name="multar" class="formulario__inbox_botonmultar" value="MULTAR">
-
-<input type="submit" name="insertarInfractor" class="formulario__inbox_botoninfractor" value="REGISTAR INFRACTOR">
+    <?php
 
 
+$inputDNI = $_GET['dniformulario'];
 
+echo($inputDNI);
+
+
+$inputPlaca = $_GET['placacoche'];
+
+echo($inputPlaca);
+
+$inputNombre = $_GET['nombreCompleto'];
+
+$infractor-> verInfractor('infractor', $inputDNI, $inputPlaca);
+
+?>
+
+<br>
+
+<a href="opciones.php">VOLVER</a>
+
+<br>
     </article>
 </section>
 
 <!-- FOOTER -->
 <footer>
 </footer>
-
-</form>
 
 </body>
 </html>

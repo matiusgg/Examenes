@@ -1,8 +1,8 @@
 <?php
 require_once 'vendor/autoload.php';
-use models\{Conexion};
+use models\{Conexion, Agente};
 
-$BDmultas = new Conexion('localhost', 'root', '', 'multasagentes');
+$BDmultas = new Agente('localhost', 'root', '', 'multasagentes');
 
 
 
