@@ -114,6 +114,8 @@ echo($valortipo['id_Multa']);
 
 
       $atributos = implode(", " , array_keys($AtributosyDatos));
+
+      echo($atributos);
        
        
       // creamos un nuevo array, para despues convertirlo en string con implode 
@@ -127,6 +129,8 @@ echo($valortipo['id_Multa']);
         
        // convertir el array anterio en un string
         $datos = implode(", ", $dato);
+
+        echo($datos);
 
       //Insertamos los valores en cada campo
       $this->conexion->query(" insert into puentemultas_infractor ($atributos) VALUES ($datos);");

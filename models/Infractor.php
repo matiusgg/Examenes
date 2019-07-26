@@ -262,5 +262,7 @@ foreach($Agente AS $valor) {
 
 }
 
+public function puntosMultas()
+
 
 }
