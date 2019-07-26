@@ -240,14 +240,13 @@ public function InsertarMulta($nombretabla, $inputmulta, $inputDNI) {
 
 }
 
-public function InsertarAgenteID($nombretabla, $inputmulta, $inputDNI) {
+public function InsertarAgenteID($nombretabla, $inputAgente, $inputDNI) {
 
 $Agente = $this->conexion->query("select * from agente");
 
 foreach($Agente AS $valor) {
 
     $Agente_id = $valor['id_Agente'];
-    $inputAgente = $_POST['agenteID'];
 
     if($Agente_id == $inputAgente){
 

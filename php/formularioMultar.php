@@ -1,4 +1,51 @@
+<?php
+require_once '../vendor/autoload.php';
 
+
+use models\{Conexion, Multas};
+
+$infractor = new Multas('localhost', 'root', '', 'multasagentes');
+
+if(!empty($_REQUEST)) {
+
+//   $AtributosyDatos = [
+
+//     'dni' => $_REQUEST['dniformulario'],
+//   //   'nombre' => $request['nombreCompleto'],
+//     'placaAuto' => $_REQUEST['placacoche'],
+//     'id_Agente' => $_REQUEST['agenteID'],
+//     'tipoMultas' => $_REQUEST['tipoMultas'],
+//     'direccionInfraccion' => $_REQUEST['direccionInfraccion'],
+//     'comentario' => $_REQUEST['comentario'],
+//     'fechaMulta' => $_REQUEST['fechaMulta'],
+//     'nombre' => $_REQUEST['nombrecompleto']
+
+
+// ];
+
+
+// echo('<pre>');
+// print_r($AtributosyDatos);
+// echo('</pre>');
+
+  $inputPlaca = $_POST['placacoche'];
+
+  $inputDNI = $_POST['dniformulario'];
+
+  $inputAgente = $_POST['agenteID'];
+
+
+
+$infractor->InsertarMulta('infractor', $_REQUEST);
+
+header('Location: resumenMulta.php?placacoche='. $inputPlaca . '&dniformulario=' . $inputDNI . '&agenteID=' . $inputAgente);
+
+
+}
+
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +64,7 @@
 
 
 
-<form action="resumenMulta.php" method="post">
+<form action="" method="post">
 
 <!-- HEADER -->
     <header>
@@ -95,6 +142,17 @@
 
     <br>
 
+
+          <!-- Lugar de la multa -->
+    
+          <label for="direccionInfraccion">
+    Lugar donde ocurrio la infraccion(no obligatorio)
+    </label>
+
+    <input type="text" name="direccionInfraccion" placeholder="Introduzca la direccion de la infraccion ">
+
+    <br>
+
      <!-- Id Agente quien hizo la multa -->
     
      <label for="agenteID">
@@ -102,6 +160,28 @@
     </label>
 
     <input type="text" name="agenteID" placeholder="Introduzca ID">
+
+         <!-- FECHA DE LA MULTA -->
+    
+         <label for="fechaMulta">
+    fecha de la multa
+    </label>
+
+    <input type="date" name="fechaMulta" placeholder="Introduzca la fehca de la multa">
+
+         <!-- COMENTARIO -->
+    
+         <label for="agenteID">
+    COMENTARIO
+    </label>
+
+
+
+    <textarea name="comentario" rows="10"></textarea>
+
+
+
+
 
     <button type="submit">
     MULTAR

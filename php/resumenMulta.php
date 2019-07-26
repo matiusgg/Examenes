@@ -1,22 +1,34 @@
 <?php
 require_once '../vendor/autoload.php';
-use models\{Conexion};
+use models\{Conexion, Multas};
 
 // echo('<pre>');
 // print_r($_REQUEST);
 // echo('</pre>');
 
-$infractor = new Conexion('localhost', 'root', '', 'multasagentes');
+$infractor = new Multas('localhost', 'root', '', 'multasagentes');
 
-if(!empty($_REQUEST)) {
 
-    $inputDNI = $_POST['dniformulario'];
-    $inputMulta = $_POST['tipoMultas'];
 
-    $infractor->InsertarMulta('infractor', $inputMulta, $inputDNI);
+    $inputDNI = $_GET['dniformulario'];
+    $inputPlaca = $_GET['placacoche'];
+    $inputAgente = $_GET['agenteID'];
 
-    $infractor->InsertarAgenteID('infractor', $inputMulta, $inputDNI);
-}
+    echo($inputDNI . '<br>');
+    echo($inputPlaca . '<br>');
+    echo($inputAgente . '<br>');
+
+
+
+
+    $infractor->MostrarAgenteID('agente', $inputAgente);
+
+
+
+
+
+
+
 
 ?>
 
@@ -45,7 +57,7 @@ if(!empty($_REQUEST)) {
     <article>
     <?php
 
-$infractor-> verTuplas('infractor');
+$infractor->mostrarMulta('puentemultas_infractor', 'infractor', 'agente', 'tipomultas');
 
 ?>
 
@@ -56,9 +68,9 @@ $infractor-> verTuplas('infractor');
 <?php
 
 
-$inputNombre = $_POST['nombrecompleto'];
+// $inputNombre = $_POST['nombrecompleto'];
 
-echo('<a href="mensajeConsulta.php?tipoMultas=' . $inputMulta . '&nombrecompleto=' . $inputNombre . '&placacoche=' . $_POST['placacoche'] . '&dniformulario=' . $inputDNI . '"> TRAMITAR CONSULTA AL INFRACTOR</a>');
+// echo('<a href="mensajeConsulta.php?tipoMultas=' . $inputMulta . '&nombrecompleto=' . $inputNombre . '&placacoche=' . $_POST['placacoche'] . '&dniformulario=' . $inputDNI . '"> TRAMITAR CONSULTA AL INFRACTOR</a>');
 
 ?>
     </article>
