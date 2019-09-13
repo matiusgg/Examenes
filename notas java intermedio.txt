@@ -1,0 +1,23 @@
+NOTAS java NIVEL INTERMEDIO:
+
+HORAS DISTRIBUIDAS SEPTIEMBRE:
+
+dia: 03/Septiembre/2019.
+Tiempo invertido: - Java: 4h. entre: 8:00am to 12:00pm,
+- ClaseDual: 4h 30min. entre: 12:00pm to 4:30pm
+
+dia: 05/Septiembre/2019.
+Tiempo invertido: - Java: 4h 30min. entre: 12:00pm to 4:30pm,
+- ClaseDual: 4h. entre: 8:00am to 12:00pm
+
+dia: 06/Septiembre/2019.
+Tiempo invertido: - Java: 4h. entre: 11:00pm to 3:00pm,
+- ClaseDual: 3h. entre: 8:00am to 11:00pm
+
+dia: 10/Septiembre/2019.
+Tiempo invertido: - Java: 4h. entre: 8:00am to 12:00pm,
+Spring Boot: 3h. entre: 12:00pm to 3:00pm,
+- ClaseDual: 1h 30min. entre: 3:00pm to 4:30pm
+
+
+
