@@ -19,5 +19,14 @@ Tiempo invertido: - Java: 4h. entre: 8:00am to 12:00pm,
 Spring Boot: 3h. entre: 12:00pm to 3:00pm,
 - ClaseDual: 1h 30min. entre: 3:00pm to 4:30pm
 
+dia: 12/Septiembre/2019.
+Tiempo invertido: - Java: 4h. entre: 8:00am to 10:00am and 2:30pm to 4:30pm,
+GIT: 4h 30min. entre: 10:00am to 2:30pm,
+
+dia: 13/Septiembre/2019.
+Tiempo invertido: - Java: 4h. Entre: 12:30pm to 3:00pm,
+GIT: 4h 30min. entre: 8:00am to 12:30pm,
+
+
 
 
