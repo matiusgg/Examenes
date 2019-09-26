@@ -42,12 +42,14 @@ class Facturas():
 
         salida.writerow(['fecha', 'gasto', 'hora', 'lugar'])
 
-        salida.writerows(self._Registro[0])
+        for i in self._Registro:
+
+            salida.writerows(i)
 
         del salida
         escribir.close()
 
-    def Buscar(self, fecha):
+    def Buscar(self, fecha, busqueda):
 
         with open('facturasR.csv', 'r') as File:
 
@@ -57,7 +59,9 @@ class Facturas():
 
                 if fecha == row[0]:
 
-                    print(row[0], row[1], row[2], row[3])
+                    busqueda['buscar'] = [row[0], row[1], row[2], row[3]]
+
+                    return busqueda['buscar']
 
     def Reinicio(self, fecha, gasto, hora, lugar):
 
@@ -81,7 +85,7 @@ class Facturas():
 
                     self._Guardar()
 
-    def VerFacturas(self):
+    def VerFacturas(self, Diccionario):
 
         print('***************************')
 
@@ -95,9 +99,16 @@ class Facturas():
 
                 print(row)
 
-                return row
+                for i in row:
 
-        print('***************************')
+                    print(i)
+
+                    Diccionario.append(i)
+
+                    print(Diccionario)
+
+
+                # return Diccionario
 
 
 # *************************************************************
@@ -142,9 +153,11 @@ def buscar():
 
         fecha = request.form['fechaBuscar']
 
-        return fecha
+        busqueda = {}
 
-        facturas.Buscar(fecha)
+        facturas.Buscar(fecha, busqueda)
+
+        return busqueda
 
     else:
 
@@ -156,9 +169,11 @@ def mostrar():
 
     if request.method == 'POST':
 
-        mostrar = facturas.VerFacturas()
+        mostrarTodo = []
 
-        return mostrar
+        facturas.VerFacturas(mostrarTodo)
+
+        return f'Estas son todas tus facturas: {mostrarTodo}'
     else:
 
         return render_template('mostrar.html')
@@ -172,15 +187,11 @@ def eliminar():
         fecha = request.form['eliminar']
         lugar = request.form['eliminar2']
 
+        registro = {}
+
         facturas.Eliminar(fecha, lugar)
 
-        registro = {
-
-            'fecha': fecha,
-            'lugar': lugar
-        }
-
-        return registro
+        return f'Has eliminado la siguiente factura: {registro}'
     else:
         return render_template('eliminar.html')
 
@@ -207,7 +218,8 @@ def home():
             'lugar': lugar
         }
 
-        return redirect(url_for('menu'))
+        # return redirect(url_for('menu'))
+        return registro
     else:
         return render_template('home.html')
 

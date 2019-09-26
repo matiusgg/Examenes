@@ -41,7 +41,9 @@ class Facturas():
 
         salida.writerow(['fecha', 'gasto', 'hora', 'lugar'])
 
-        salida.writerows(self._Registro[0])
+        for i in self._Registro:
+
+            salida.writerows(i)
 
         # del salida
         escribir.close()
