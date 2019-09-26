@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+
+{{ super() }}
+
+AGREGAR
+
+{% endblock %}
+
+{% block section %}
+
+<form action="{{ url_for('home') }}" method="post">
+
+<div class="contenedor">
+
+    <h1>Agregue la factura que quiere registrar</h1>
+
+    <label for="fecha">
+        Fecha de ticket
+    </label>
+
+    <input type="text" name="fecha">
+
+    <!-- *************************************** -->
+
+    <label for="gasto">
+            Gasto
+        </label>
+    
+        <input type="number" name="gasto">
+
+    <!-- ************************************************* -->
+
+    <label for="hora">
+        Hora del ticket
+    </label>
+
+    <input type="text" name="hora">
+
+    <!-- *************************************** -->
+
+    <label for="lugar">
+            lugar donde realizo el ticket(ciudad/pueblo)
+        </label>
+    
+        <input type="text" name="lugar">
+
+    <!-- ************************************************* -->
+
+    <button type="submit">
+        Registrar
+    </button>
+
+
+</div>
+
+</form>
+
+
+{% endblock %}

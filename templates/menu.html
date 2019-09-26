@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+
+{{ super() }}
+
+MENU
+
+{% endblock %}
+
+{% block section %}
+
+<h1>BIENVENIDO A SU CONTROL DE FACTURAS PREFERIDO</h1>
+
+    <h3>ESCOGA ENTRE LAS OPCIONES!!!</h3>
+
+
+
+<div class="contenedor">
+
+    <!-- Agregar -->
+
+    <a href="{{ url_for('home') }}">AGREGAR</a>
+
+    <br>
+
+    <!-- buscar -->
+
+    <a href="{{ url_for('buscar') }}">buscar</a>
+
+    <br>
+
+    <!-- ELIMINAR -->
+
+    <a href="{{ url_for('eliminar') }}">ELIMINAR</a>
+
+    <br>
+
+    <!-- VER TODAS LAS FACTURAS -->
+
+    <a href="{{ url_for('mostrar') }}">VER TODAS LAS FACTURAS</a>
+
+
+
+
+</div>
+
+
+
+{% endblock %}

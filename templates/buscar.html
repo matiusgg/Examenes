@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+
+{{ super() }}
+
+BUSCAR
+
+{% endblock %}
+
+{% block section %}
+
+<form action="{{ url_for('buscar') }}" method="post">
+
+<label for="buscar">
+        Ingresa la fecha que quieras para saber las facturas que tuvistes en esa fecha(anyo/mes/dia):
+
+</label>
+
+<input type="text" name="fechaBuscar">
+
+<button type="submit">
+    BUSCAR
+</button>
+
+</form>
+
+{% endblock %}

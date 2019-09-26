@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+
+{{ super() }}
+
+ELIMINAR
+
+{% endblock %}
+
+{% block section %}
+
+<form action="{{ url_for('eliminar') }}" method="post">
+
+        <label for="eliminar">
+                Ingresa la fecha de la factura que quieres eliminar(anyo/mes/dia): 
+        
+        </label>
+        
+        <input type="text" name="eliminar">
+
+        <label for="eliminar2">
+                'Ingresa el lugar de la factura que quieres eliminar: ')
+        
+        </label>
+        
+        <input type="text" name="eliminar2">
+        
+        <button type="submit">
+            Eliminar
+        </button>
+
+</form>
+
+
+{% endblock %}
