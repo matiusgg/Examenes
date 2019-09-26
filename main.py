@@ -99,6 +99,7 @@ class Facturas():
 
                 print(row)
 
+
                 for i in row:
 
                     print(i)
