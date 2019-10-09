@@ -34,6 +34,15 @@ def llegada():
     # * Variable global que nos permite usarla en otras rutas
 
     global result
+    global diccHistoria
+
+    #* lista Historial que va a ir al metodo verHistorial
+
+    listaHistoria = []
+
+    #* Diccionario que nos permitira ver el historial
+
+    diccHistoria = {}
 
     # * Datos de los input y el <select>
 
@@ -50,6 +59,20 @@ def llegada():
     # * metodo para sacar el resultado
 
     result = objetoCalc.resultado()
+
+    # * metodo donde tenemos el historial de operaciones
+
+    historial = objetoCalc.verHistorial(listaHistoria)
+
+    #* Bucle
+
+    contador = 0
+
+    for i in listaHistoria:
+
+        diccHistoria[f'operacion{contador}'] = f'{i[0]} {i[1]} {i[2]} = {i[3]}'
+
+        contador += 1
 
     return redirect(url_for('resultado'))
 
@@ -93,7 +116,7 @@ def llegadaRaiz():
 @app.route('/resultado', methods=['GET'])
 def resultado():
 
-    return render_template('resultado.html', resultado=result)
+    return render_template('resultado.html', resultado=result, **diccHistoria)
 
 # *****************************************
 
