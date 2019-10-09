@@ -74,8 +74,7 @@ class Calculadora():
             '-': self._restar(),
             '*': self._multiplicar(),
             '/': self._dividir(),
-            '**': self._potencia(),
-            '√': self._raizCuadrada()
+            '**': self._potencia()
 
         }
 
@@ -90,3 +89,19 @@ class Calculadora():
                 return valor
 
                 break
+
+    def resultadoRaiz(self):
+
+        raiz = {
+            '√': self._raizCuadrada()
+        }
+
+        for llave, valor in raiz.items():
+
+            if self._operador == str(llave):
+
+                print(llave)
+
+                print(valor)
+
+                return valor

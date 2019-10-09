@@ -6,9 +6,17 @@ CALCULADORA
 
 {% endblock %}
 
+
+
+
+
 {% block header %}
 
 {% endblock %}
+
+
+
+
 
 {% block main %}
 
@@ -58,10 +66,6 @@ CALCULADORA
                             <option value="**">
                                 **
                             </option>
-                    
-                            <option value="√">
-                                √
-                            </option>
                 </select>
               </div>
             </div>
@@ -74,7 +78,7 @@ CALCULADORA
         <div class="control">
 
                 <label class="label">Ingresa el segundo numero</label>
-            <input name="valor2"class="input is-primary" type="number" placeholder="Primary input">
+            <input name="valor2"class="input is-primary" type="number" placeholder="Primary input" >
         </div>
         </div>
 
@@ -83,6 +87,15 @@ CALCULADORA
     <div class="control">
             <button class="button is-primary">CALCULAR</button>
           </div>
+
+    <br>
+    <!--Otras opciones-->
+
+    <h4 class="title is-4">Otras Opciones: </h4>
+
+    <!-- RAIZ -->
+
+    <a class="button is-info" href="{{ url_for('raiz') }}">RAIZ CUADRADA</a>
 
         </form>
 </div>

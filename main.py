@@ -47,9 +47,45 @@ def llegada():
 
     objetoCalc = Calculadora(valor1, valor2, operador)
 
+    # * metodo para sacar el resultado
+
     result = objetoCalc.resultado()
 
     return redirect(url_for('resultado'))
+
+# ****************************************
+
+
+@app.route('/raiz')
+def raiz():
+
+    return render_template('raiz.html')
+
+
+# ****************************************
+
+@app.route('/raiz', methods=['POST'])
+def llegadaRaiz():
+
+    # * Variable global que nos permite usarla en otras rutas
+
+    global resultRaiz
+
+    # * Datos de los input y el <select>
+
+    valor1 = int(request.form['valor1'])
+
+    raiz = request.form['raiz']
+
+    # * Creacion objetos
+
+    objetoRaiz = Calculadora(valor1, '', raiz)
+
+    # * Metodo resultado Raiz
+
+    resultRaiz = objetoRaiz.resultadoRaiz()
+
+    return render_template('raiz.html', resultadoRaiz=resultRaiz)
 
 # *****************************************
 
