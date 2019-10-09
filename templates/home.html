@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+
+CALCULADORA
+
+{% endblock %}
+
+{% block header %}
+
+<div class="titulo">
+
+<h1>BIENVENIDO A TU CALCULADORA FAVORITA</h1>
+
+</div>
+
+{% endblock %}
+
+{% block main %}
+
+<form action="{{ url_for('home') }}" method="post">
+
+<div class="contenedor">
+
+    <input type="number" name="valor1">
+
+    <input type="number" name="valor2">
+
+    <select name="operador">
+        <option value="+">
+            +
+        </option>
+
+        <option value="-">
+         -
+        </option>
+        
+        <option value="*">
+         *
+        </option>
+
+        <option value="/">
+         /
+        </option>
+
+        <option value="**">
+            **
+        </option>
+
+        <option value="√">
+            √
+        </option>
+
+
+    </select>
+
+    <button class="botonCalcular">
+        CALCULAR
+    </button>
+
+</div>
+
+</form>
+
+{% endblock %}
