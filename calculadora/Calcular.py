@@ -81,12 +81,12 @@ class Calculadora():
 
         for llave, valor in operador.items():
 
-            if self._operador == llave:
+            if self._operador == str(llave):
+
+                print(llave)
+
+                print(valor)
 
                 return valor
 
-            else:
-
-                mensajeError = 'No has escogido ninguna opcion'
-
-                return mensajeError
+                break
