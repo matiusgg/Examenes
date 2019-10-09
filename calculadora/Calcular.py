@@ -3,10 +3,6 @@ import math
 
 class Calculadora():
 
-    # *Lista
-
-    operador = ['+', '-', '*', '/', '**', '√']
-
     # ************************************
 
     # * CONTRUCTOR
@@ -73,32 +69,24 @@ class Calculadora():
 
     def resultado(self):
 
-        if self._operador == "+":
+        operador = {
+            '+': self._sumar(),
+            '-': self._restar(),
+            '*': self._multiplicar(),
+            '/': self._dividir(),
+            '**': self._potencia(),
+            '√': self._raizCuadrada()
 
-            return self._sumar()
+        }
 
-        elif self._operador == "-":
+        for llave, valor in operador.items():
 
-            return self._restar()
+            if self._operador == llave:
 
-        elif self._operador == "*":
+                return valor
 
-            return self._multiplicar()
+            else:
 
-        elif self._operador == "/":
+                mensajeError = 'No has escogido ninguna opcion'
 
-            return self._dividir()
-
-        elif self._operador == '**':
-
-            return self._potencia()
-
-        elif self._operador == '√':
-
-            return self._raizCuadrada()
-
-        else:
-
-            mensajeError = 'No has escogido ninguna opcion'
-
-            return mensajeError
+                return mensajeError
