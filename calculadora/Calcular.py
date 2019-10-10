@@ -41,15 +41,12 @@ class Calculadora():
 
         sumar = self._valor1 + self._valor2
 
-        datosSumar = Historial(
-            self._valor1, self._operador, self._valor2, sumar)
+        # datosSumar = Historial(
+        #     self._valor1, self._operador, self._valor2, sumar)
 
-        self._listaDatos.append(datosSumar.listaOperacion())
-
-        self._guardar()
+        # self._listaDatos.append(datosSumar.listaOperacion())
 
         return sumar
-        
 
     # * RESTAR
 
@@ -57,12 +54,10 @@ class Calculadora():
 
         restar = self._valor1 - self._valor2
 
-        datosrestar = Historial(
-            self._valor1, self._operador, self._valor2, restar)
+        # datosrestar = Historial(
+        #     self._valor1, self._operador, self._valor2, restar)
 
-        self._listaDatos.append(datosrestar.listaOperacion())
-
-        
+        # self._listaDatos.append(datosrestar.listaOperacion())
 
         return restar
 
@@ -72,12 +67,10 @@ class Calculadora():
 
         multiplicar = self._valor1 * self._valor2
 
-        datosmultiplicar = Historial(
-            self._valor1, self._operador, self._valor2, multiplicar)
+        # datosmultiplicar = Historial(
+        #     self._valor1, self._operador, self._valor2, multiplicar)
 
-        self._listaDatos.append(datosmultiplicar.listaOperacion())
-
-        
+        # self._listaDatos.append(datosmultiplicar.listaOperacion())
 
         return multiplicar
 
@@ -87,12 +80,10 @@ class Calculadora():
 
         dividir = self._valor1 / self._valor2
 
-        datosdividir = Historial(
-            self._valor1, self._operador, self._valor2, dividir)
+        # datosdividir = Historial(
+        #     self._valor1, self._operador, self._valor2, dividir)
 
-        self._listaDatos.append(datosdividir.listaOperacion())
-
-        
+        # self._listaDatos.append(datosdividir.listaOperacion())
 
         return dividir
 
@@ -102,12 +93,10 @@ class Calculadora():
 
         potencia = self._valor1 ** self._valor2
 
-        datospotencia = Historial(
-            self._valor1, self._operador, self._valor2, potencia)
+        # datospotencia = Historial(
+        #     self._valor1, self._operador, self._valor2, potencia)
 
-        self._listaDatos.append(datospotencia.listaOperacion())
-
-        
+        # self._listaDatos.append(datospotencia.listaOperacion())
 
         return potencia
 
@@ -116,6 +105,11 @@ class Calculadora():
     def _raizCuadrada(self):
 
         raizCuadrada = math.sqrt(self._valor1)
+
+        # datosraizCuadrada = Historial(
+        #     self._valor1, self._operador, self._valor2, raizCuadrada)
+
+        # self._listaDatos.append(datosraizCuadrada.listaOperacion())
 
         return raizCuadrada
 
@@ -147,7 +141,7 @@ class Calculadora():
     def resultadoRaiz(self):
 
         raiz = {
-            '√': self._raizCuadrada()
+            'raizCuadrada': self._raizCuadrada()
         }
 
         for llave, valor in raiz.items():
@@ -162,35 +156,15 @@ class Calculadora():
 
     # * Agregar al historial
 
-    def _guardar(self):
+    def insertar(self, numero1, operacion, numero2, resultado):
+        with open('historial.csv', 'a') as f:
+            f.write(f'{numero1} {operacion} {numero2} = {resultado}\n')
 
-        escribir = open('historial.csv', 'a', newline='')
-
-        salida = csv.writer(escribir)
-
-        salida.writerow(['valor1', 'operador', 'valor2', 'resultado'])
-
-        for i in self._listaDatos:
-
-            salida.writerows(i)
+    def mostrar(self, historial):
+        with open('historial.csv', 'rt') as f:
+            for linea in f:
+                historial.append(linea)
+        return historial
 
         # del salida
         escribir.close()
-
-    def verHistorial(self, listaHistorial):
-
-        with open('historial.csv', 'r') as File:
-
-            reader = csv.reader(File)
-
-            for row in reader:
-
-                print('**************************')
-
-                print(row)
-
-                if row[0] != 'valor1' and row[1] != 'operacion' and row[2] != 'valor2' and row[3] != 'resultado':
-
-                    listaHistorial.append(row)
-
-                    print(listaHistorial)

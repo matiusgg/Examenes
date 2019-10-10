@@ -34,15 +34,11 @@ def llegada():
     # * Variable global que nos permite usarla en otras rutas
 
     global result
-    global diccHistoria
+    global mostrarHistorial
 
-    #* lista Historial que va a ir al metodo verHistorial
+    # * lista que alberga el historial
 
-    listaHistoria = []
-
-    #* Diccionario que nos permitira ver el historial
-
-    diccHistoria = []
+    historial = []
 
     # * Datos de los input y el <select>
 
@@ -60,19 +56,13 @@ def llegada():
 
     result = objetoCalc.resultado()
 
-    # * metodo donde tenemos el historial de operaciones
+    # * Historial metodo
 
-    historial = objetoCalc.verHistorial(listaHistoria)
+    insertarHistoria = objetoCalc.insertar(valor1, operador, valor2, result)
 
-    #* Bucle
+    # *
 
-    
-
-    for i in listaHistoria:
-
-        diccHistoria.append(f'{i[0]} {i[1]} {i[2]} = {i[3]}')
-
-        
+    mostrarHistorial = objetoCalc.mostrar(historial)
 
     return redirect(url_for('resultado'))
 
@@ -93,6 +83,11 @@ def llegadaRaiz():
     # * Variable global que nos permite usarla en otras rutas
 
     global resultRaiz
+    global mostrarHistorial
+
+    # * lista que alberga el historial
+
+    historial = []
 
     # * Datos de los input y el <select>
 
@@ -108,7 +103,17 @@ def llegadaRaiz():
 
     resultRaiz = objetoRaiz.resultadoRaiz()
 
-    return render_template('raiz.html', resultadoRaiz=resultRaiz)
+    # * Historial metodo
+
+    insertarHistoria = objetoRaiz.insertar(valor1, raiz, '-->', resultRaiz)
+
+    # *
+
+    mostrarHistorial = objetoRaiz.mostrar(historial)
+
+    # RETURN
+
+    return render_template('raiz.html', resultadoRaiz=resultRaiz, historial=mostrarHistorial)
 
 # *****************************************
 
@@ -116,7 +121,7 @@ def llegadaRaiz():
 @app.route('/resultado', methods=['GET'])
 def resultado():
 
-    return render_template('resultado.html', resultado=result, dicc=diccHistoria)
+    return render_template('resultado.html', resultado=result, historial=mostrarHistorial)
 
 # *****************************************
 
