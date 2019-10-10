@@ -190,10 +190,6 @@ class Calculadora():
 
                 if row[0] != 'valor1' and row[1] != 'operacion' and row[2] != 'valor2' and row[3] != 'resultado':
 
-                    for i in row:
+                    listaHistorial.append(row)
 
-                        print(i)
-
-                        listaHistorial.append(row)
-
-                        print(listaHistorial)
+                    print(listaHistorial)

@@ -42,7 +42,7 @@ def llegada():
 
     #* Diccionario que nos permitira ver el historial
 
-    diccHistoria = {}
+    diccHistoria = []
 
     # * Datos de los input y el <select>
 
@@ -66,13 +66,13 @@ def llegada():
 
     #* Bucle
 
-    contador = 0
+    
 
     for i in listaHistoria:
 
-        diccHistoria[f'operacion{contador}'] = f'{i[0]} {i[1]} {i[2]} = {i[3]}'
+        diccHistoria.append(f'{i[0]} {i[1]} {i[2]} = {i[3]}')
 
-        contador += 1
+        
 
     return redirect(url_for('resultado'))
 
@@ -116,7 +116,7 @@ def llegadaRaiz():
 @app.route('/resultado', methods=['GET'])
 def resultado():
 
-    return render_template('resultado.html', resultado=result, **diccHistoria)
+    return render_template('resultado.html', resultado=result, dicc=diccHistoria)
 
 # *****************************************
 
