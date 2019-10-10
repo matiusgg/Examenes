@@ -49,6 +49,7 @@ class Calculadora():
         self._guardar()
 
         return sumar
+        
 
     # * RESTAR
 
