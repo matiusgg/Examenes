@@ -25,21 +25,32 @@ JUEGO PIEDRA, PAPEL, TIJERA, LAGARTO, SPOCK, GARRAFA, EDANS
 
     <!---->
 
-
-
-       <input type="checkbox" name="piedra" class="botones">
-
-        <img src="{{ url_for('static', filename='img/piedra.jpg')}}" alt="">
-
-    <!-- </button> -->
-
-    <!---->
+<button type="submit">
 
     <label for="piedra">
 
-            <input type="image" src="{{ url_for('static', filename='img/papel.jpg')}}" alt="" class="botones" name="papel">
+            <input  type="checkbox" name="piedra" class="inputboton" value="piedra">
+
+            <img src="{{ url_for('static', filename='img/piedra.jpg')}}">
 
         </label>
+
+    </button>
+
+
+    <!---->
+
+    <button type="submit">
+
+            <label for="papel">
+        
+                    <input class="inputboton" type="checkbox" name="papel">
+        
+                    <img src="{{ url_for('static', filename='img/papel.jpg')}}">
+        
+                </label>
+        
+            </button>
 
           
         
@@ -47,11 +58,17 @@ JUEGO PIEDRA, PAPEL, TIJERA, LAGARTO, SPOCK, GARRAFA, EDANS
 
     <!---->
 
-    <label for="piedra">
+    <button type="submit">
 
-            <input type="image" src="{{ url_for('static', filename='img/tijera.jpg')}}" alt="" class="botones" name="tijera">
-
-        </label>
+            <label for="tijera">
+        
+                    <input class="inputboton" type="checkbox" name="tijera">
+        
+                    <img src="{{ url_for('static', filename='img/tijera.jpg')}}">
+        
+                </label>
+        
+            </button>
 
 
         
@@ -59,11 +76,17 @@ JUEGO PIEDRA, PAPEL, TIJERA, LAGARTO, SPOCK, GARRAFA, EDANS
 
     <!---->
 
-    <label for="piedra">
+    <button type="submit">
 
-            <input type="image" src="{{ url_for('static', filename='img/lagarto.jpg')}}" alt="" class="botones" name="lagarto">
-
-        </label>
+            <label for="lagarto">
+        
+                    <input class="inputboton" type="checkbox" name="lagarto">
+        
+                    <img src="{{ url_for('static', filename='img/lagarto.jpg')}}">
+        
+                </label>
+        
+            </button>
 
       
         
@@ -71,34 +94,48 @@ JUEGO PIEDRA, PAPEL, TIJERA, LAGARTO, SPOCK, GARRAFA, EDANS
 
     <!---->
 
-    <label for="piedra">
+    <button type="submit">
 
-            <input type="image" src="{{ url_for('static', filename='img/spock.png')}}" alt="" class="botones" name="spock">
+            <label for="spock">
         
-        </label>
+                    <input class="inputboton" type="checkbox" name="spock">
+        
+                    <img src="{{ url_for('static', filename='img/spock.png')}}">
+        
+                </label>
+        
+            </button>
 
  
     <!---->
 
-    <label for="piedra">
+    <button type="submit">
 
-            <input type="image" src="{{ url_for('static', filename='img/garrafa.png')}}" alt="" class="botones" name="garrafa">
-
-        </label>
-
+            <label for="garrafa">
+        
+                    <input class="inputboton" type="checkbox" name="garrafa">
+        
+                    <img src="{{ url_for('static', filename='img/garrafa.png')}}">
+        
+                </label>
+        
+            </button>
          
            
 
     <!---->
 
-    <label for="piedra">
+    <button type="submit">
 
-            <input type="image" src="{{ url_for('static', filename='img/edans.jpg')}}" alt="" class="botones" name="edans">
-
-        </label>
-
-       
-        <button type="submit">JUGAR</button>
+            <label for="edans">
+        
+                    <input class="inputboton" type="checkbox" name="edans">
+        
+                    <img src="{{ url_for('static', filename='img/edans.jpg')}}">
+        
+                </label>
+        
+            </button>
          
 
 </div>

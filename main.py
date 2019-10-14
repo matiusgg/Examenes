@@ -15,6 +15,20 @@ app.config['SECRET_KEY'] = 'SUPER SECRETO'
 @app.route('/')
 def redireccionar():
 
+    global OPCIONES
+
+    OPCIONES = [
+
+        'piedra',
+        'papel',
+        'tijera',
+        'lagarto',
+        'spock',
+        'garrafa',
+        'edans'
+
+    ]
+
     return redirect('/home')
 
 # *****************************************
@@ -23,7 +37,7 @@ def redireccionar():
 @app.route('/home')
 def home():
 
-    return render_template('home.html')
+    return render_template('home.html', opciones=OPCIONES)
 
 # *****************************************
 
@@ -37,11 +51,18 @@ def llegadaDatos():
 
     opcionYmensaje = []
 
-    piedra = request.form['piedra']
-
+    # valorInputs = {
+    #     'piedra': request.form['piedra'],
+    #     'papel': request.form['papel'],
+    #     'tijera': request.form['tijera'],
+    #     'lagarto': request.form['lagarto'],
+    #     'spock': request.form['spock'],
+    #     'garrafa': request.form['garrafa'],
+    #     'edans': request.form['edans']
+    # }
     juegoObj = Pptlsge()
 
-    opcionYmensaje = juegoObj.resultado('piedra', opcionYmensaje)
+    opcionYmensaje = juegoObj.piedra(opcionYmensaje)
 
     opcionAleatoria = opcionYmensaje[0]
 
