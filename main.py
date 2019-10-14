@@ -31,12 +31,21 @@ def home():
 def llegadaDatos():
 
     global resultPiedra
+    global opcionAleatoria
+    global mensaje
+    global opcionYmensaje
+
+    opcionYmensaje = []
 
     piedra = request.form['piedra']
 
     juegoObj = Pptlsge()
 
-    resultPiedra = juegoObj.piedra()
+    opcionYmensaje = juegoObj.resultado('piedra', opcionYmensaje)
+
+    opcionAleatoria = opcionYmensaje[0]
+
+    mensaje = opcionYmensaje[1]
 
     return redirect(url_for('resultado'))
 
@@ -45,7 +54,7 @@ def llegadaDatos():
 @app.route('/resultado', methods=['GET'])
 def resultado():
 
-    return render_template('resultado.html', resultado=resultPiedra)
+    return render_template('resultado.html', resultado=opcionYmensaje, opcionAleatoria=opcionAleatoria, mensaje =mensaje)
 
 
 # *****************************************

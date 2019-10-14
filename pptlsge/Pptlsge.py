@@ -12,13 +12,13 @@ class Pptlsge():
 
     OPCIONES = {
 
-    0: '{{ url_for(\'static\', filename=\'img/piedra.jpg\')}}',
-    1: '{{ url_for(\'static\', filename=\'img/papel.jpg\')}}',
-    2: '{{ url_for(\'static\', filename=\'img/tijera.jpg\')}}',
-    3: '{{ url_for(\'static\', filename=\'img/lagarto.jpg\')}}',
-    4: '{{ url_for(\'static\', filename=\'img/spock.png\')}}',
-    5: '{{ url_for(\'static\', filename=\'img/garrafa.png\')}}',
-    6: '{{ url_for(\'static\', filename=\'img/edans.jpg\')}}'
+    0: 'piedra.jpg',
+    1: 'papel.jpg',
+    2: 'tijera.jpg',
+    3: 'lagarto.jpg',
+    4: 'spock.png',
+    5: 'garrafa.png',
+    6: 'edans.jpg'
 
 }
 
@@ -43,30 +43,30 @@ class Pptlsge():
         
 
 
-    def piedra(self):
+    def piedra(self, opcionYmensaje):
 
-        opcionYmensaje = []
+        
 
         piedra = self.OPCIONES[0]
 
         if piedra == self.aleatorio:
 
             opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append('<h1> Has empatado </h1>')
+            opcionYmensaje.append(' Has empatado')
 
             return opcionYmensaje
         
         elif self.aleatorio == self.OPCIONES[2] or self.aleatorio == self.OPCIONES[3] or self.aleatorio == self.OPCIONES[5]:
 
             opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append('<h1> Has ganado </h1>')
+            opcionYmensaje.append(' Has ganado ')
 
             return opcionYmensaje
 
         elif self.aleatorio == self.OPCIONES[1] or self.aleatorio == self.OPCIONES[4] or self.aleatorio == self.OPCIONES[6]:
 
             opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append('<h1> Has perdido </h1>')
+            opcionYmensaje.append(' Has perdido ')
 
             return opcionYmensaje
 
@@ -111,18 +111,18 @@ class Pptlsge():
 
 
 
-    # def resultado(self, inputOpcion):
+    def resultado(self, inputOpcion, opcionYmensaje):
 
-    #     resultado = {
+        resultado = {
 
-    #         'piedra': self.piedra()
-    #     }
+            'piedra': self.piedra(opcionYmensaje)
+        }
 
-    #     for llave, valor in resultado.items():
+        for llave, valor in resultado.items():
 
-    #         if inputOpcion == llave:
+            if inputOpcion == llave:
 
-    #             return valor
+                return valor
 
 
 
