@@ -27,6 +27,27 @@ def home():
 
 # *****************************************
 
+@app.route('/home', methods=['POST'])
+def llegadaDatos():
+
+    global resultPiedra
+
+    piedra = request.form['piedra']
+
+    juegoObj = Pptlsge()
+
+    resultPiedra = juegoObj.piedra()
+
+    return redirect(url_for('resultado'))
+
+# *****************************************
+
+@app.route('/resultado', methods=['GET'])
+def resultado():
+
+    return render_template('resultado.html', resultado=resultPiedra)
+
+
 # *****************************************
 
 

@@ -6,3 +6,103 @@ JUEGO PIEDRA, PAPEL, TIJERA, LAGARTO, SPOCK, GARRAFA, EDANS
 
 {% endblock %}
 
+<h3 class="title is-3">JUEGO</h3>
+
+
+{% block header %}
+
+<h3 class="title is-3">JUEGO</h3>
+
+{% endblock %}
+
+{% block main %}
+
+<form action="{{ url_for('home') }}" method="post">
+
+<div class="contenedor">
+
+        
+
+    <!---->
+
+
+
+       <input type="checkbox" name="piedra" class="botones">
+
+        <img src="{{ url_for('static', filename='img/piedra.jpg')}}" alt="">
+
+    <!-- </button> -->
+
+    <!---->
+
+    <label for="piedra">
+
+            <input type="image" src="{{ url_for('static', filename='img/papel.jpg')}}" alt="" class="botones" name="papel">
+
+        </label>
+
+          
+        
+            
+
+    <!---->
+
+    <label for="piedra">
+
+            <input type="image" src="{{ url_for('static', filename='img/tijera.jpg')}}" alt="" class="botones" name="tijera">
+
+        </label>
+
+
+        
+            
+
+    <!---->
+
+    <label for="piedra">
+
+            <input type="image" src="{{ url_for('static', filename='img/lagarto.jpg')}}" alt="" class="botones" name="lagarto">
+
+        </label>
+
+      
+        
+            
+
+    <!---->
+
+    <label for="piedra">
+
+            <input type="image" src="{{ url_for('static', filename='img/spock.png')}}" alt="" class="botones" name="spock">
+        
+        </label>
+
+ 
+    <!---->
+
+    <label for="piedra">
+
+            <input type="image" src="{{ url_for('static', filename='img/garrafa.png')}}" alt="" class="botones" name="garrafa">
+
+        </label>
+
+         
+           
+
+    <!---->
+
+    <label for="piedra">
+
+            <input type="image" src="{{ url_for('static', filename='img/edans.jpg')}}" alt="" class="botones" name="edans">
+
+        </label>
+
+       
+        <button type="submit">JUGAR</button>
+         
+
+</div>
+
+</form>
+
+{% endblock %}
