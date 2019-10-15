@@ -38,205 +38,45 @@ class Pptlsge():
     def __init__(self):
 
         self.aleatorio = random.choice(self.OPCIONES)
+        self.mensaje = []
 
 
-    def piedra(self, opcionYmensaje):
+    def operacion(self, inputOpcion):
 
 
-        piedra = self.OPCIONES[0]
+        if inputOpcion == self.aleatorio:
 
-        if piedra == self.aleatorio:
+            self.mensaje.append(inputOpcion)
+            self.mensaje.append('EMPATE')
+                    
 
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has empatado')
+            return self.mensaje
 
-            return opcionYmensaje
+        else:
 
-        elif self.aleatorio == self.OPCIONES[2] or self.aleatorio == self.OPCIONES[3] or self.aleatorio == self.OPCIONES[5]:
+            for llave, valor in self.REGLAS.items():
 
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has ganado ')
+                if inputOpcion == llave:
 
-            return opcionYmensaje
+                    for ganas in valor:
 
-        elif self.aleatorio == self.OPCIONES[1] or self.aleatorio == self.OPCIONES[4] or self.aleatorio == self.OPCIONES[6]:
+                        if self.aleatorio == ganas:
 
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has perdido ')
+                            self.mensaje.append(self.aleatorio)
+                            self.mensaje.append('GANAS')
 
-            return opcionYmensaje
+                            return self.mensaje
+                
+                        else:
 
-# ************************************************************
+                            self.mensaje.append(self.aleatorio)
+                            self.mensaje.append('PIERDES')
 
-    def papel(self, opcionYmensaje):
+                            return self.mensaje
 
 
-        papel = self.OPCIONES[1]
 
-        if papel == self.aleatorio:
 
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has empatado')
-
-            return opcionYmensaje
-
-        elif self.aleatorio == self.OPCIONES[6] or self.aleatorio == self.OPCIONES[4] or self.aleatorio == self.OPCIONES[0]:
-
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has ganado ')
-
-            return opcionYmensaje
-
-        elif self.aleatorio == self.OPCIONES[2] or self.aleatorio == self.OPCIONES[3] or self.aleatorio == self.OPCIONES[5]:
-
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has perdido ')
-
-            return opcionYmensaje
-
-# ************************************************************
-
-    def tijera(self, opcionYmensaje):
-
-
-        tijera = self.OPCIONES[2]
-
-        if tijera == self.aleatorio:
-
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has empatado')
-
-            return opcionYmensaje
-
-        elif self.aleatorio == self.OPCIONES[1] or self.aleatorio == self.OPCIONES[3] or self.aleatorio == self.OPCIONES[6]:
-
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has ganado ')
-
-            return opcionYmensaje
-
-        elif self.aleatorio == self.OPCIONES[0] or self.aleatorio == self.OPCIONES[4] or self.aleatorio == self.OPCIONES[5]:
-
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has perdido ')
-
-            return opcionYmensaje
-
-
-# ************************************************************
-
-    def lagarto(self, opcionYmensaje):
-
-
-        lagarto = self.OPCIONES[3]
-
-        if lagarto == self.aleatorio:
-
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has empatado')
-
-            return opcionYmensaje
-
-        elif self.aleatorio == self.OPCIONES[1] or self.aleatorio == self.OPCIONES[4] or self.aleatorio == self.OPCIONES[5]:
-
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has ganado ')
-
-            return opcionYmensaje
-
-        elif self.aleatorio == self.OPCIONES[0] or self.aleatorio == self.OPCIONES[2] or self.aleatorio == self.OPCIONES[6]:
-
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has perdido ')
-
-            return opcionYmensaje
-
-
-# ************************************************************
-
-    def spock(self, opcionYmensaje):
-
-
-        spock = self.OPCIONES[4]
-
-        if spock == self.aleatorio:
-
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has empatado')
-
-            return opcionYmensaje
-
-        elif self.aleatorio == self.OPCIONES[0] or self.aleatorio == self.OPCIONES[2] or self.aleatorio == self.OPCIONES[5]:
-
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has ganado ')
-
-            return opcionYmensaje
-
-        elif self.aleatorio == self.OPCIONES[1] or self.aleatorio == self.OPCIONES[3] or self.aleatorio == self.OPCIONES[6]:
-
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has perdido ')
-
-            return opcionYmensaje
-
-
-# ************************************************************
-
-    def garrafa(self, opcionYmensaje):
-
-
-        garrafa = self.OPCIONES[5]
-
-        if garrafa == self.aleatorio:
-
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has empatado')
-
-            return opcionYmensaje
-
-        elif self.aleatorio == self.OPCIONES[1] or self.aleatorio == self.OPCIONES[2] or self.aleatorio == self.OPCIONES[6]:
-
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has ganado ')
-
-            return opcionYmensaje
-
-        elif self.aleatorio == self.OPCIONES[0] or self.aleatorio == self.OPCIONES[3] or self.aleatorio == self.OPCIONES[4]:
-
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has perdido ')
-
-            return opcionYmensaje
-
-
-# ************************************************************
-
-    def edans(self, opcionYmensaje):
-
-
-        edans = self.OPCIONES[6]
-
-        if edans == self.aleatorio:
-
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has empatado')
-
-            return opcionYmensaje
-
-        elif self.aleatorio == self.OPCIONES[0] or self.aleatorio == self.OPCIONES[3] or self.aleatorio == self.OPCIONES[4]:
-
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has ganado ')
-
-            return opcionYmensaje
-
-        elif self.aleatorio == self.OPCIONES[1] or self.aleatorio == self.OPCIONES[2] or self.aleatorio == self.OPCIONES[5]:
-
-            opcionYmensaje.append(self.aleatorio)
-            opcionYmensaje.append(' Has perdido ')
-
-            return opcionYmensaje
 
 # *****************************************************************
 

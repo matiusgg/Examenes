@@ -17,17 +17,7 @@ def redireccionar():
 
     global OPCIONES
 
-    OPCIONES = [
-
-        'piedra',
-        'papel',
-        'tijera',
-        'lagarto',
-        'spock',
-        'garrafa',
-        'edans'
-
-    ]
+    OPCIONES = ['piedra','papel','tijera','lagarto','spock','garrafa','edans']
 
     return redirect('/home')
 
@@ -44,12 +34,12 @@ def home():
 @app.route('/home', methods=['POST'])
 def llegadaDatos():
 
-    global resultPiedra
-    global opcionAleatoria
-    global mensaje
+    global opcionInput
+    # global opcionAleatoria
+    # global mensaje
     global opcionYmensaje
 
-    opcionYmensaje = []
+
 
     # valorInputs = {
     #     'piedra': request.form['piedra'],
@@ -60,13 +50,18 @@ def llegadaDatos():
     #     'garrafa': request.form['garrafa'],
     #     'edans': request.form['edans']
     # }
+
+    opcionInput = request.form['opcion']
+
     juegoObj = Pptlsge()
 
-    opcionYmensaje = juegoObj.piedra(opcionYmensaje)
+    opcionYmensaje = juegoObj.operacion(opcionInput)
 
-    opcionAleatoria = opcionYmensaje[0]
+    # opcionAleatoria = opcionYmensaje[0]
 
-    mensaje = opcionYmensaje[1]
+    # mensaje = opcionYmensaje[1]
+
+    
 
     return redirect(url_for('resultado'))
 
@@ -75,7 +70,10 @@ def llegadaDatos():
 @app.route('/resultado', methods=['GET'])
 def resultado():
 
-    return render_template('resultado.html', resultado=opcionYmensaje, opcionAleatoria=opcionAleatoria, mensaje =mensaje)
+    maquina = opcionYmensaje[0]
+    mensaje = opcionYmensaje[1]
+
+    return render_template('resultado.html', maquina=maquina, mensaje=mensaje, input=opcionInput)
 
 
 # *****************************************

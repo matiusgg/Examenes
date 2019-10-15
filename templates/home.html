@@ -17,129 +17,34 @@ JUEGO PIEDRA, PAPEL, TIJERA, LAGARTO, SPOCK, GARRAFA, EDANS
 
 {% block main %}
 
-<form action="{{ url_for('home') }}" method="post">
 
 <div class="contenedor">
 
+        {% for i in opciones %}
+
+
+        <form action="{{ url_for('home') }}" method="post">
+
+
+                        <h2>{{ i }}</h2>
+
+                        <input placeholder="1996" value="{{ i }}" type="hidden" name="opcion">
+    
+                {% set oa = 'img/' + i + '.jpg' %}
+
+                <button type="submit">
+
+                <img src="{{ url_for('static', filename=oa)}}" class="botones">
+
+        </button>
+   
+</form>
+            {% endfor %}
         
-
-    <!---->
-
-<button type="submit">
-
-    <label for="piedra">
-
-            <input  type="checkbox" name="piedra" class="inputboton" value="piedra">
-
-            <img src="{{ url_for('static', filename='img/piedra.jpg')}}">
-
-        </label>
-
-    </button>
-
-
-    <!---->
-
-    <button type="submit">
-
-            <label for="papel">
-        
-                    <input class="inputboton" type="checkbox" name="papel">
-        
-                    <img src="{{ url_for('static', filename='img/papel.jpg')}}">
-        
-                </label>
-        
-            </button>
-
-          
-        
-            
-
-    <!---->
-
-    <button type="submit">
-
-            <label for="tijera">
-        
-                    <input class="inputboton" type="checkbox" name="tijera">
-        
-                    <img src="{{ url_for('static', filename='img/tijera.jpg')}}">
-        
-                </label>
-        
-            </button>
-
-
-        
-            
-
-    <!---->
-
-    <button type="submit">
-
-            <label for="lagarto">
-        
-                    <input class="inputboton" type="checkbox" name="lagarto">
-        
-                    <img src="{{ url_for('static', filename='img/lagarto.jpg')}}">
-        
-                </label>
-        
-            </button>
-
-      
-        
-            
-
-    <!---->
-
-    <button type="submit">
-
-            <label for="spock">
-        
-                    <input class="inputboton" type="checkbox" name="spock">
-        
-                    <img src="{{ url_for('static', filename='img/spock.png')}}">
-        
-                </label>
-        
-            </button>
-
- 
-    <!---->
-
-    <button type="submit">
-
-            <label for="garrafa">
-        
-                    <input class="inputboton" type="checkbox" name="garrafa">
-        
-                    <img src="{{ url_for('static', filename='img/garrafa.png')}}">
-        
-                </label>
-        
-            </button>
-         
-           
-
-    <!---->
-
-    <button type="submit">
-
-            <label for="edans">
-        
-                    <input class="inputboton" type="checkbox" name="edans">
-        
-                    <img src="{{ url_for('static', filename='img/edans.jpg')}}">
-        
-                </label>
-        
-            </button>
-         
 
 </div>
 
-</form>
+
 
 {% endblock %}
+
