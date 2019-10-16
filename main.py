@@ -34,6 +34,7 @@ def llegada():
 
     # * Variable global SIGNO para llevarla a la ruta 'SIGNO'
     global signo
+    global fecha
 
     # *Recoger el dato del input
     fecha = request.form['fecha']
@@ -53,7 +54,7 @@ def llegada():
 @app.route('/signo', methods=['GET'])
 def signo():
 
-    return render_template('signo.html', signo=signo)
+    return render_template('signo.html', **signo, fecha=fecha)
 
 # *****************************************
 

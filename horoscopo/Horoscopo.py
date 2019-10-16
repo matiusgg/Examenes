@@ -2,66 +2,13 @@
 Clase Horoscopo
 QUE CADA DIA TENGA UN UNICO MENSAJE, QUE SI REINICIAS EL MISMO DIA NO TE CAMBIE LA FRASE SI NO QUE SE MANTENGA
 '''
-#* Importamos JSON
+# * Importamos JSON y el RANDOM y CSV
 import json
+import random
+import csv
+
 
 class Horoscopo():
-
-    # SIGNOS = ['aries', 'tauro', 'geminis', 'cancer', 'leo', 'virgo',
-    #           'libra', 'escorpio', 'sagitario', 'capricornio', 'acuario', 'piscis']
-
-    # * diccionario Signo que nos ayudara en los metodos
-
-    # signos = {
-    #     'acuario': {
-    #         'mes': [1, 2],
-    #         'dias': [20, 18]
-    #     },
-    #     'piscis': {
-    #         'mes': [2, 3],
-    #         'dias': [19, 20]
-    #     },
-    #     'aries': {
-    #         'mes': [3, 4],
-    #         'dias': [21, 20]
-    #     },
-    #     'tauro': {
-    #         'mes': [4, 5],
-    #         'dias': [21, 20]
-    #     },
-    #     'geminis': {
-    #         'mes': [5, 6],
-    #         'dias': [21, 20]
-    #     },
-    #     'cancer': {
-    #         'mes': [6, 7],
-    #         'dias': [21, 20]
-    #     },
-    #     'leo': {
-    #         'mes': [7, 8],
-    #         'dias': [21, 21]
-    #     },
-    #     'virgo': {
-    #         'mes': [8, 9],
-    #         'dias': [22, 22]
-    #     },
-    #     'libra': {
-    #         'mes': [9, 10],
-    #         'dias': [23, 22]
-    #     },
-    #     'escorpio': {
-    #         'mes': [10, 11],
-    #         'dias': [23, 22]
-    #     },
-    #     'sagitario': {
-    #         'mes': [11, 12],
-    #         'dias': [23, 20]
-    #     },
-    #     'capricornio': {
-    #         'mes': [12, 1],
-    #         'dias': [21, 19]
-    #     }
-    # }
 
     def __init__(self, fecha):
 
@@ -71,6 +18,8 @@ class Horoscopo():
         self.diccFecha = {}
         # *diccionario donde estaran el signo y frase
         self.resultado = {}
+        # * FRASE
+        self.frase = ''
 
     # *****************************************************
 
@@ -88,7 +37,7 @@ class Horoscopo():
         mesInput = int(self.diccFecha['mes'])
         diaInput = int(self.diccFecha['dia'])
 
-        #* Abrimos el archivo signo.json donde tenemos el diccionario de signos para poder retornarnos el signo
+        # * Abrimos el archivo signo.json donde tenemos el diccionario de signos para poder retornarnos el signo
 
         with open('static/json/signos.json') as contenido:
 
@@ -98,24 +47,54 @@ class Horoscopo():
 
                 if ((i.get('mes')[0] == mesInput) and (diaInput >= i.get('dias')[0])) or ((i.get('mes')[1] == mesInput) and (diaInput <= i.get('dias')[1])):
 
-                    return i.get('signo')
+                    self.resultado['signo'] = i.get('signo')
 
-        # for signoLlave, valorFecha in self.signos.items():
+                    self.frase = random.choice(i.get('frases'))
 
-        #     for llave, valor in valorFecha.items():
+                    self.guardarFrase(self.fecha, self.frase)
+                    self.mostrarFrase(self.fecha, self.frase)
 
-        #         for i in valor:
+                    print(self.resultado)
 
-        #             mesInput = int(self.diccFecha['mes'])
-        #             diaInput = int(self.diccFecha['dia'])
+                    return self.resultado
 
-        #             if llave == 'mes':
+    # * REgistro de la fecha introducida
 
-        #                 if ((valorFecha['mes'][0] == mesInput) and (diaInput >= valorFecha['dias'][0])) or ((valorFecha['mes'][1] == mesInput) and (diaInput <= valorFecha['dias'][1])):
+    # * metodo guardarFrase()
+    def guardarFrase(self, fecha, frase):
 
-        #                     return signoLlave
+        escribir = open('frases.csv', 'a', newline='')
 
+        salida = csv.writer(escribir)
 
-# objHoroscopo = Horoscopo('2019-5-21')
+        salida.writerow(['fecha', 'frase'])
 
-# print(objHoroscopo.signo())
+        salida.writerow([(fecha), (frase)])
+
+        # del salida
+        escribir.close()
+
+    # * metodo mostrarFrase()
+    def mostrarFrase(self, fecha, frase):
+
+        with open('frases.csv', 'r') as File:
+
+            reader = csv.reader(File)
+
+            for row in reader:
+
+                print('**************************')
+
+                print(row)
+
+                if row[0] != 'fecha' and row[1] != 'frase':
+
+                    if fecha == row[0]:
+
+                        # Agregamos al diccionario la frase agregada al archivo csv que salio del RANDOM
+
+                        self.resultado['frase'] = row[1]
+
+                    else:
+
+                        print('La frase esta repetida para la misma fecha')

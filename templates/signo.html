@@ -2,7 +2,7 @@
 
 {% block title %}
 
-HOROSCOPO
+Tu SIGNO es: 
 
 {% endblock %}
 
@@ -29,6 +29,10 @@ HOROSCOPO
 <img src="{{ url_for('static', filename=svgSigno)}}" alt="" class="signosvg">
 
 <!--Frase aleatoria-->
+
+<h5 class="subtitle is-5">Tu frase del dia {{ fecha }} es:</h5>
+
+<h6 class="subtitle is-6">{{ frase }}</h6>
 
 <br>
 
