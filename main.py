@@ -17,6 +17,7 @@ app.config['SECRET_KEY'] = 'SUPER SECRETO'
 def redireccionar():
 
     return redirect('/home')
+    
 
 # *****************************************
 

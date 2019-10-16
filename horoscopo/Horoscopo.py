@@ -91,7 +91,7 @@ class Horoscopo():
 
                     if fecha == row[0]:
 
-                        # Agregamos al diccionario la frase agregada al archivo csv que salio del RANDOM
+                        # * Agregamos al diccionario la frase agregada al archivo csv que salio del RANDOM
 
                         self.resultado['frase'] = row[1]
 
