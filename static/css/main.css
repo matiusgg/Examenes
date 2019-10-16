@@ -1,0 +1,73 @@
+main{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    
+}
+
+/* HOME.HTML */
+
+.contenedor{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    width: 360px;
+    height: 500px;
+}
+
+.titulo{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    margin: 30px;
+}
+
+.fecha{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    margin: 20px;
+}
+
+.logo{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    padding: 50px;
+}
+
+
+
+/* SIGNO.HTML */
+
+.contenedorsigno{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    margin: 100px;
+    
+}
+
+.signosvg{
+
+    margin: 20px;
+}
+

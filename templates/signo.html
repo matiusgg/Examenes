@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+
+HOROSCOPO
+
+{% endblock %}
+
+{% block main %}
+
+<!--Caja contenedorsigno-->
+
+<div class="contenedorsigno">
+
+        <h3 class="title is-5">RESULTADO: </h3>
+                    
+        <br>
+        
+        <h5 class="subtitle is-6">Tu signo es el siguiente: </h5>
+
+    <!--SVG signo-->
+
+{% set svgSigno = 'svg/' + signo + '.svg' %}
+
+<img src="{{ url_for('static', filename=svgSigno)}}" alt="" class="signosvg">
+
+<!--Frase aleatoria-->
+
+<br>
+
+<!-- <a> VOLVER-->
+
+        <a class="button is-info" href="{{ url_for('home') }}">VOLVER</a>
+
+
+</div>
+
+
+{% endblock %}
