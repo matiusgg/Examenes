@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+
+REGLAS RULETA
+
+{% endblock %}
+
+<!--bloque header-->
+
+{% block header %}
+
+
+
+{% endblock %}
+
+
+<!--bloque main -->
+
+{% block main %}
+
+<!--Contenedor-->
+    <div class="contenedor">
+
+        <!--titulo-->
+
+            <div class="titulo">
+
+                    <h3 class="title is-5">REGLAS DE LA RULETA</h3>
+                    
+                    <br>
+
+                    <h5 class="subtitle is-6">Tendras las siguientes opciones: </h5>
+                    </div>
+
+                    <br>
+
+                    <!--Opciones fijas-->
+
+                    <!--PNG signo-->
+
+                    <div class="contenedorimagenes">
+
+                    {% for opcion in opcionesFijas %}
+
+    <h3 class="title is-5">{{ opcion }}</h3>
+
+    {% set pngOpcion = 'img/' + opcion + '.png' %}
+    
+    <img src="{{ url_for('static', filename=pngOpcion)}}" alt="" class="pngopcion">
+
+                    {% endfor %}
+
+                    </div>
+
+
+                    <br>
+
+                    <h5 class="subtitle is-6">Tendrás que escoger otras opciones que deseas: </h5>
+
+          <!--Boton Ir a mas opciones-->
+
+
+          <button class="button is-primary"><a href="{{ url_for('opciones') }}">RELLENA LAS SIGUIENTES OPCIONES</a></button>
+
+    
+    </div>
+
+
+{% endblock %}

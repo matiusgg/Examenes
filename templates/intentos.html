@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+
+MODO INTENTOS
+
+{% endblock %}
+
+<!--bloque header-->
+
+{% block header %}
+
+
+
+{% endblock %}
+
+
+<!--bloque main -->
+
+{% block main %}
+
+<!--Contenedor-->
+    <div class="contenedor">
+
+        <!--titulo-->
+
+            <div class="titulo">
+
+                    <h3 class="title is-5">ESCOGE ENTRE LOS DOS MODOS DE JUEGO</h3>
+                    
+
+                    
+                    </div>
+
+                    <br>
+
+                    <!--FORM -->
+
+            <form action="{{ url_for('ruleta') }}" method="post">
+                    
+
+                    <!-- Modos de juego sobre intentos -->
+
+                    <!-- Solo 7 intentos -->
+
+                    <br>
+
+                    <h5 class="subtitle is-6">Solo 7 intentos</h5>
+
+                    <input type="checkbox" name="intento" value=0>
+
+                    <!-- Intentos infinitos -->
+
+                    <br>
+
+                    <h5 class="subtitle is-6">Numero de intentos infinitos</h5>
+
+                    <input type="checkbox" name="intento" value=infinito>
+
+                    <br>
+
+          <!--Boton jugar-->
+
+
+          <button class="button is-primary"><input type="hidden" name="ruleta" value="activar">JUGAR</button>
+
+          </form>
+
+    
+    </div>
+
+
+{% endblock %}
