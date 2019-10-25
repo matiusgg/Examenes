@@ -96,6 +96,9 @@ def ruleta():
     #* metodo Ruleta()
     listaRandom = ruletaObj.ruleta(inputRuleta)
 
+    # #*resultadoTotal
+    # listaResultado = ruletaObj.resultado()
+
 
     return render_template('ruleta.html', opcion=listaRandom[0], splitOpcion=listaRandom[1], resultado=listaRandom[2])
 
