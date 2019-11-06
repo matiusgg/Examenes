@@ -65,6 +65,12 @@ MOVIMIENTOS
 
 {% endif%}
 
+{% if movimientos|length == 0 %}
+
+<h1 class="title is-4">No se han realizado movimientos aún</h1>
+
+{% endif %}
+
 <!--************************************************-->
 
 <a class="button is-link is-rounded" id="volver" href="{{ url_for('opciones') }}">VOLVER</a>
