@@ -7,7 +7,7 @@ class Cajero():
 
         self.opciones = {}
 
-    def OperacionesOpcion(self, inputOpcion):
+    def OperacionesOpcion(self, inputOpcion, operacion):
 
         if inputOpcion == 'consultar':
             print(inputOpcion)
@@ -15,6 +15,42 @@ class Cajero():
             self.mostrarSaldo(inputOpcion)
 
             return self.opciones['consultar']
+
+        if inputOpcion == 'retirar':
+
+            self.mostrarSaldo('consultar')
+
+            saldo = self.opciones['consultar']
+
+            print(type(saldo))
+            print(type(operacion))
+
+            if saldo < operacion:
+
+                # self.opciones['mensajeRetirar'] = 'No tienes suficiente dinero para retirar'
+
+                return 'No tienes suficiente dinero para retirar'
+            
+            else:
+
+                saldo -= operacion
+
+                #* Guardamos los cambios del saldo en self.guardarSaldo()
+                self.guardarSaldo('consultar', saldo)
+                #* Tambien agregamos el movimiento de RETIRAR a movimientos.csv
+                self.guardarSaldo(inputOpcion, saldo)
+
+                #* Se ha actualizado el saldo
+                self.mostrarSaldo('consultar')
+                #* Agregamos al diccionario opciones el nuevo movimiento, en este caso RETIRAR dinero
+                self.mostrarSaldo(inputOpcion)
+                nuevoSaldo = self.opciones['retirar']
+
+                return f'Acabas de retirar: {operacion} y tu saldo actual es: {nuevoSaldo}'
+
+                
+
+
 
 
 
@@ -76,7 +112,7 @@ class Cajero():
 
                     if row[0] != 'opcion' and row[1] != 'saldo':
 
-                        self.opciones['consultar'] = row[1]
+                        self.opciones['consultar'] = int(row[1])
 
         else:
 

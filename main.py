@@ -70,7 +70,6 @@ def opciones():
 def opcionesEscogida():
 
     global opcion
-    global activar
 
 
     opcion = request.form['opcion']
@@ -80,6 +79,8 @@ def opcionesEscogida():
         if i == opcion:
 
             return redirect(url_for(f'{opcion}'))
+
+            
 
     return render_template('opciones.html')
 
@@ -98,10 +99,10 @@ def ingresar():
 @app.route('/consultar')
 def consultar():
 
-    saldo = cajeroObj.OperacionesOpcion(opcion)
+    saldo = cajeroObj.OperacionesOpcion(opcion, 'ninguna')
     print(saldo)
 
-    return render_template('consultar.html')
+    return render_template('consultar.html', saldo=saldo)
 
 
 # *****************************************
@@ -110,6 +111,21 @@ def consultar():
 def retirar():
 
     return render_template('retirar.html')
+
+# *****************************************
+
+@app.route('/retirar', methods=['POST'])
+def retiraPost():
+
+    retirarInput = request.form['retirar']
+
+    retirar = cajeroObj.OperacionesOpcion(opcion, int(retirarInput))
+
+
+
+
+
+    return render_template('retirar.html', retirar=retirar)
 
 # *****************************************
 
