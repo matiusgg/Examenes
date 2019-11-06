@@ -69,6 +69,10 @@ def opciones():
 @app.route('/opciones', methods=['POST'])
 def opcionesEscogida():
 
+    global opcion
+    global activar
+
+
     opcion = request.form['opcion']
 
     for i in opciones:
@@ -85,12 +89,17 @@ def opcionesEscogida():
 @app.route('/ingresar')
 def ingresar():
 
+
+
     return render_template('ingresar.html')
 
 # *****************************************
 
 @app.route('/consultar')
 def consultar():
+
+    saldo = cajeroObj.OperacionesOpcion(opcion)
+    print(saldo)
 
     return render_template('consultar.html')
 

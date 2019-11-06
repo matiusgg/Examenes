@@ -7,43 +7,97 @@ class Cajero():
 
         self.opciones = {}
 
-    # def
+    def OperacionesOpcion(self, inputOpcion):
+
+        if inputOpcion == 'consultar':
+            print(inputOpcion)
+
+            self.mostrarSaldo(inputOpcion)
+
+            return self.opciones['consultar']
 
 
 
     
 # ****************************************************************
 
-        # * metodo guardarOpcion()
-    # def guardarOpcion(self, opcion, score):
+        # * metodo guardarSaldo()
+    def guardarSaldo(self, opcion, saldo):
 
-    #     escribir = open('score.csv', 'a', newline='')
 
-    #     salida = csv.writer(escribir)
+        #* Condicional para actualizar el saldo.csv
 
-    #     salida.writerow(['fecha', 'frase'])
+        if opcion == 'consultar':
 
-    #     salida.writerow([(opcion), (score)])
+            escribir = open('saldo.csv', 'w', newline='')
 
-    #     # del salida
-    #     escribir.close()
+            salida = csv.writer(escribir)
+
+            salida.writerow(['opcion', 'saldo'])
+
+            salida.writerow([(opcion), (saldo)])
+
+            # del salida
+            escribir.close()
+        
+        else:
+            #* Sino para agregar a los movimientos.csv
+
+            escribir = open('movimientos.csv', 'a', newline='')
+
+            salida = csv.writer(escribir)
+
+            salida.writerow(['opcion', 'saldo'])
+
+            salida.writerow([(opcion), (saldo)])
+
+            # del salida
+            escribir.close()
+
 
 # *****************************************************************
 
-# * metodo mostrarFrase()
-    # def mostrarFrase(self, fecha, frase):
+# * metodo mostrarSaldo()
+    def mostrarSaldo(self, opcion):
 
-    #     with open('frases.csv', 'r') as File:
+        #* Condicional para actualizar el saldo.csv
 
-    #         reader = csv.reader(File)
+        if opcion == 'consultar':
 
-    #         for row in reader:
+            with open('saldo.csv', 'r') as File:
 
-    #             print('**************************')
+                reader = csv.reader(File)
 
-    #             print(row)
+                for row in reader:
 
-    #             if row[0] != 'fecha' and row[1] != 'frase':
+                    print('**************************')
+
+                    print(row)
+
+                    if row[0] != 'opcion' and row[1] != 'saldo':
+
+                        self.opciones['consultar'] = row[1]
+
+        else:
+
+            #* Sino agrega al diccionario todos los movimientos
+
+            with open('movimientos.csv', 'r') as File:
+
+                reader = csv.reader(File)
+
+                for row in reader:
+
+                    print('**************************')
+
+                    print(row)
+
+                    if row[0] != 'opcion' and row[1] != 'saldo':
+
+                        self.opciones[f'{row[0]}'] = row[1]
+
+
+                    
 
 # *****************************************************************
 
