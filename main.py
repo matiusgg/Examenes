@@ -96,6 +96,19 @@ def ingresar():
 
 # *****************************************
 
+@app.route('/ingresar', methods=['POST'])
+def ingresarPost():
+
+    ingresarInput = request.form['ingresar']
+
+    ingresar = cajeroObj.OperacionesOpcion(opcion, int(ingresarInput))
+
+
+
+    return render_template('ingresar.html', ingresar=ingresar)
+
+# *****************************************
+
 @app.route('/consultar')
 def consultar():
 
@@ -132,7 +145,12 @@ def retiraPost():
 @app.route('/movimientos')
 def movimientos():
 
-    return render_template('movimientos.html')
+    registro = {}
+
+    movimientos = cajeroObj.OperacionesOpcion(opcion, 'ninguna')
+
+
+    return render_template('movimientos.html', movimientos=movimientos)
 
 
 # *****************************************

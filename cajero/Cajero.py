@@ -7,6 +7,9 @@ class Cajero():
 
         self.opciones = {}
 
+        #*Registro de movimientos
+        self.movimientos = []
+
     def OperacionesOpcion(self, inputOpcion, operacion):
 
         if inputOpcion == 'consultar':
@@ -48,13 +51,48 @@ class Cajero():
 
                 return f'Acabas de retirar: {operacion} y tu saldo actual es: {nuevoSaldo}'
 
-                
+        if inputOpcion == 'ingresar':
+
+            self.mostrarSaldo('consultar')
+
+            saldo = self.opciones['consultar']
+
+            print(type(saldo))
+            print(type(operacion))
+
+            if operacion == 0:
+
+                # self.opciones['mensajeRetirar'] = 'No tienes suficiente dinero para retirar'
+
+                return 'No ingresaste ninguna cantidad'
+            
+            else:
+
+                saldo += operacion
+
+                #* Guardamos los cambios del saldo en self.guardarSaldo()
+                self.guardarSaldo('consultar', saldo)
+                #* Tambien agregamos el movimiento de INGRESAR a movimientos.csv
+                self.guardarSaldo(inputOpcion, saldo)
+
+                #* Se ha actualizado el saldo
+                self.mostrarSaldo('consultar')
+                #* Agregamos al diccionario opciones el nuevo movimiento, en este caso INGRESAR dinero
+                self.mostrarSaldo(inputOpcion)
+                nuevoSaldo = self.opciones['ingresar']
+
+                return f'Acabas de ingresar: {operacion} y tu saldo actual es: {nuevoSaldo}'
+
+        if inputOpcion == 'movimientos':
+
+            self.mostrarSaldo(inputOpcion)
+            print(self.opciones)
+
+            print(self.movimientos)
+
+            return self.movimientos
 
 
-
-
-
-    
 # ****************************************************************
 
         # * metodo guardarSaldo()
@@ -131,6 +169,10 @@ class Cajero():
                     if row[0] != 'opcion' and row[1] != 'saldo':
 
                         self.opciones[f'{row[0]}'] = row[1]
+
+                        self.movimientos.extend([[row[0], row[1]]])
+
+
 
 
                     
