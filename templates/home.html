@@ -1,19 +1,27 @@
 {% extends 'layout.html' %}
 
+<!--*********************************************-->
+
 {% block title %}
 
 CAJERO AUTOMATICO
 
 {% endblock %}
 
+<!--*********************************************-->
+
 {% block header %}
 
-<h1>BIENVENIDO A TU CAJERO</h1>
+<h1 class="title is-2">BIENVENIDO A TU CAJERO</h1>
 
 {% endblock %}
 
+<!--*********************************************-->
+
 
 {% block main %}
+
+<div class="contenedor" >
 
 
     <img src="{{ url_for('static', filename='img/logoATM.svg')}}" alt="">
@@ -22,17 +30,37 @@ CAJERO AUTOMATICO
 
 <form action="{{ url_for('home') }}" method="post">
 
-    <label for="codigo">
-            Ingrese el codigo de su cuenta bancaria: 
-    </label>
-
-    <h3>Recuerde minimo 6 digitos</h3>
+    <h3 class="title is-3">Recuerde minimo 6 digitos</h3>
 
     <br>
 
-    <input type="password" name="codigo" required>
 
-    <button type="submit">ENTRAR</button>
+
+    <!--***********************************************-->
+
+    <div class="field">
+            <p class="control has-icons-left">
+                    <label for="codigo">
+                            Ingrese el codigo de su cuenta bancaria: 
+                    </label>
+                    <input class="input" id="botonhome" type="password" name="codigo" required placeholder="Ingresar Codigo">
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </p>
+          </div>
+
+    
+
+    <!--***********************************************-->
+
+    <div class="botonhome"></div>
+
+    <button class="button is-link" type="submit">ENTRAR</button>
+
+    </div>
+
+    <!--*********************************************-->
 
     {% if mensaje != '' %}
 
@@ -40,9 +68,15 @@ CAJERO AUTOMATICO
 
     {% endif %}
 
+    <!--*********************************************-->
+
     
 
 </form>
 
+</div>
+
 
 {% endblock %}
+
+<!--*********************************************-->

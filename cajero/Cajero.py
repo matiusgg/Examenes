@@ -1,26 +1,33 @@
-import os
+#* Importar CSV
 import csv
 
+#* Clase Cajero
 class Cajero():
 
+    #*contructor
     def __init__(self):
 
+        #* Diccionario que nos ayudara para realizar el contenido de los metodos
         self.opciones = {}
 
         #*Registro de movimientos
         self.movimientos = []
-
+    
+    #* Metodo OperacionesOpcion()
     def OperacionesOpcion(self, inputOpcion, operacion):
 
+        #* Si INPUTOPCION es igual 'consultar'
         if inputOpcion == 'consultar':
             print(inputOpcion)
 
+            #* llamada a self.mostrarSaldo() para que nos agregue el saldo de saldo.csv al diccionario self.opciones
             self.mostrarSaldo(inputOpcion)
 
             return self.opciones['consultar']
 
         if inputOpcion == 'retirar':
 
+            #* Llamada a self.mostrarSaldo() para tener el saldo actual en el diccionario.
             self.mostrarSaldo('consultar')
 
             saldo = self.opciones['consultar']
@@ -28,9 +35,8 @@ class Cajero():
             print(type(saldo))
             print(type(operacion))
 
+            #* Si saldo es menor que la cantidad del input ingresada por el usuario.
             if saldo < operacion:
-
-                # self.opciones['mensajeRetirar'] = 'No tienes suficiente dinero para retirar'
 
                 return 'No tienes suficiente dinero para retirar'
             
@@ -53,6 +59,7 @@ class Cajero():
 
         if inputOpcion == 'ingresar':
 
+            #* Llamada a self.mostrarSaldo() para tener el saldo actual en el diccionario.
             self.mostrarSaldo('consultar')
 
             saldo = self.opciones['consultar']
@@ -60,6 +67,7 @@ class Cajero():
             print(type(saldo))
             print(type(operacion))
 
+            #* Si operacion es igual 0, es decir no agrego ninguna cantidad para ingresar.
             if operacion == 0:
 
                 # self.opciones['mensajeRetirar'] = 'No tienes suficiente dinero para retirar'
@@ -85,12 +93,29 @@ class Cajero():
 
         if inputOpcion == 'movimientos':
 
+            #* Llamada a self.mostrarSaldo() para tener todos los movimientos del archivo movimientos.csv en self.movimientos
             self.mostrarSaldo(inputOpcion)
             print(self.opciones)
 
+            #* Aplicar REVERSE() para tener los ultimos movimientos que se han realizado.
+            self.movimientos.reverse()
+
+            print('?'*30)
             print(self.movimientos)
 
-            return self.movimientos
+            #* Lista que albergara los ultimos 10 movimientos.
+            ultimosMovimientos = []
+
+            #* Si son mas de 10 movimientos, solo agrega 10 a la lista ultimosMovimientos.
+            if len(self.movimientos) >= 10:
+
+                ultimosMovimientos.extend([self.movimientos[0], self.movimientos[1], self.movimientos[2], self.movimientos[3], self.movimientos[4], self.movimientos[5], self.movimientos[6], self.movimientos[7], self.movimientos[8], self.movimientos[9]])
+
+                return ultimosMovimientos
+            
+            else:
+                #* Sino retorname los que se encuentren.
+                return self.movimientos
 
 
 # ****************************************************************
@@ -115,7 +140,7 @@ class Cajero():
             escribir.close()
         
         else:
-            #* Sino para agregar a los movimientos.csv
+            #* Sino para agregar los demas movimientos al archivo movimientos.csv
 
             escribir = open('movimientos.csv', 'a', newline='')
 
@@ -154,7 +179,7 @@ class Cajero():
 
         else:
 
-            #* Sino agrega al diccionario todos los movimientos
+            #* Sino agrega al diccionario todos los movimientos de movimientos.csv
 
             with open('movimientos.csv', 'r') as File:
 
@@ -170,6 +195,7 @@ class Cajero():
 
                         self.opciones[f'{row[0]}'] = row[1]
 
+                        #* Ademas para la opcion MOVIMIENTOS, agregar a la lista tambien todos los movimientos.
                         self.movimientos.extend([[row[0], row[1]]])
 
 

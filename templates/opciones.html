@@ -1,28 +1,37 @@
 {% extends 'layout.html' %}
 
+<!--*********************************************-->
+
 {% block title %}
 
 OPCIONES
 
 {% endblock %}
 
+<!--*********************************************-->
+
 {% block header %}
 
-<h1>BIENVENIDO A TU CAJERO</h1>
+<h1 class="title is-2">OPCIONES</h1>
 
 {% endblock %}
 
 
+<!--*********************************************-->
+
+
 {% block main %}
+
+<div class="contenedor" >
 
 
     <img src="{{ url_for('static', filename='img/targeta.png')}}" alt="">
 
     <br>
 
-<h1>ESCOJA ENTRE LAS SIGUIENTES OPCIONES</h1>
+<h1 class="title is-4">ESCOJA ENTRE LAS SIGUIENTES OPCIONES</h1>
 
-
+<!--*********************************************-->
 
         {% for i in opciones %}
 
@@ -30,7 +39,7 @@ OPCIONES
 
         <br>
 
-        <button type="submit">
+        <button type="submit" id="botonopciones" class="button is-link is-rounded">
             
             {{ i }}
 
@@ -44,9 +53,13 @@ OPCIONES
 
         {% endfor %}
 
+        <!--*********************************************-->
 
+</div>
 
 
 
 
 {% endblock %}
+
+<!--*********************************************-->
