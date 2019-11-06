@@ -1,33 +1,35 @@
-#* Importar CSV
+# * Importar CSV
 import csv
 
-#* Clase Cajero
+# * Clase Cajero
+
+
 class Cajero():
 
-    #*contructor
+    # *contructor
     def __init__(self):
 
-        #* Diccionario que nos ayudara para realizar el contenido de los metodos
+        # * Diccionario que nos ayudara para realizar el contenido de los metodos
         self.opciones = {}
 
-        #*Registro de movimientos
+        # *Registro de movimientos
         self.movimientos = []
-    
-    #* Metodo OperacionesOpcion()
+
+    # * Metodo OperacionesOpcion()
     def OperacionesOpcion(self, inputOpcion, operacion):
 
-        #* Si INPUTOPCION es igual 'consultar'
+        # * Si INPUTOPCION es igual 'consultar'
         if inputOpcion == 'consultar':
             print(inputOpcion)
 
-            #* llamada a self.mostrarSaldo() para que nos agregue el saldo de saldo.csv al diccionario self.opciones
+            # * llamada a self.mostrarSaldo() para que nos agregue el saldo de saldo.csv al diccionario self.opciones
             self.mostrarSaldo(inputOpcion)
 
             return self.opciones['consultar']
 
         if inputOpcion == 'retirar':
 
-            #* Llamada a self.mostrarSaldo() para tener el saldo actual en el diccionario.
+            # * Llamada a self.mostrarSaldo() para tener el saldo actual en el diccionario.
             self.mostrarSaldo('consultar')
 
             saldo = self.opciones['consultar']
@@ -35,23 +37,23 @@ class Cajero():
             print(type(saldo))
             print(type(operacion))
 
-            #* Si saldo es menor que la cantidad del input ingresada por el usuario.
+            # * Si saldo es menor que la cantidad del input ingresada por el usuario.
             if saldo < operacion:
 
                 return 'No tienes suficiente dinero para retirar'
-            
+
             else:
 
                 saldo -= operacion
 
-                #* Guardamos los cambios del saldo en self.guardarSaldo()
+                # * Guardamos los cambios del saldo en self.guardarSaldo()
                 self.guardarSaldo('consultar', saldo)
-                #* Tambien agregamos el movimiento de RETIRAR a movimientos.csv
+                # * Tambien agregamos el movimiento de RETIRAR a movimientos.csv
                 self.guardarSaldo(inputOpcion, saldo)
 
-                #* Se ha actualizado el saldo
+                # * Se ha actualizado el saldo
                 self.mostrarSaldo('consultar')
-                #* Agregamos al diccionario opciones el nuevo movimiento, en este caso RETIRAR dinero
+                # * Agregamos al diccionario opciones el nuevo movimiento, en este caso RETIRAR dinero
                 self.mostrarSaldo(inputOpcion)
                 nuevoSaldo = self.opciones['retirar']
 
@@ -59,7 +61,7 @@ class Cajero():
 
         if inputOpcion == 'ingresar':
 
-            #* Llamada a self.mostrarSaldo() para tener el saldo actual en el diccionario.
+            # * Llamada a self.mostrarSaldo() para tener el saldo actual en el diccionario.
             self.mostrarSaldo('consultar')
 
             saldo = self.opciones['consultar']
@@ -67,25 +69,25 @@ class Cajero():
             print(type(saldo))
             print(type(operacion))
 
-            #* Si operacion es igual 0, es decir no agrego ninguna cantidad para ingresar.
+            # * Si operacion es igual 0, es decir no agrego ninguna cantidad para ingresar.
             if operacion == 0:
 
                 # self.opciones['mensajeRetirar'] = 'No tienes suficiente dinero para retirar'
 
                 return 'No ingresaste ninguna cantidad'
-            
+
             else:
 
                 saldo += operacion
 
-                #* Guardamos los cambios del saldo en self.guardarSaldo()
+                # * Guardamos los cambios del saldo en self.guardarSaldo()
                 self.guardarSaldo('consultar', saldo)
-                #* Tambien agregamos el movimiento de INGRESAR a movimientos.csv
+                # * Tambien agregamos el movimiento de INGRESAR a movimientos.csv
                 self.guardarSaldo(inputOpcion, saldo)
 
-                #* Se ha actualizado el saldo
+                # * Se ha actualizado el saldo
                 self.mostrarSaldo('consultar')
-                #* Agregamos al diccionario opciones el nuevo movimiento, en este caso INGRESAR dinero
+                # * Agregamos al diccionario opciones el nuevo movimiento, en este caso INGRESAR dinero
                 self.mostrarSaldo(inputOpcion)
                 nuevoSaldo = self.opciones['ingresar']
 
@@ -93,38 +95,39 @@ class Cajero():
 
         if inputOpcion == 'movimientos':
 
-            #* Llamada a self.mostrarSaldo() para tener todos los movimientos del archivo movimientos.csv en self.movimientos
+            # * Llamada a self.mostrarSaldo() para tener todos los movimientos del archivo movimientos.csv en self.movimientos
             self.mostrarSaldo(inputOpcion)
             print(self.opciones)
 
-            #* Aplicar REVERSE() para tener los ultimos movimientos que se han realizado.
+            # * Aplicar REVERSE() para tener los ultimos movimientos que se han realizado.
             self.movimientos.reverse()
 
             print('?'*30)
             print(self.movimientos)
 
-            #* Lista que albergara los ultimos 10 movimientos.
+            # * Lista que albergara los ultimos 10 movimientos.
             ultimosMovimientos = []
 
-            #* Si son mas de 10 movimientos, solo agrega 10 a la lista ultimosMovimientos.
+            # * Si son mas de 10 movimientos, solo agrega 10 a la lista ultimosMovimientos.
             if len(self.movimientos) >= 10:
 
-                ultimosMovimientos.extend([self.movimientos[0], self.movimientos[1], self.movimientos[2], self.movimientos[3], self.movimientos[4], self.movimientos[5], self.movimientos[6], self.movimientos[7], self.movimientos[8], self.movimientos[9]])
+                ultimosMovimientos.extend([self.movimientos[0], self.movimientos[1], self.movimientos[2], self.movimientos[3], self.movimientos[4],
+                                           self.movimientos[5], self.movimientos[6], self.movimientos[7], self.movimientos[8], self.movimientos[9]])
 
                 return ultimosMovimientos
-            
+
             else:
-                #* Sino retorname los que se encuentren.
+                # * Sino retorname los que se encuentren.
                 return self.movimientos
 
 
 # ****************************************************************
 
         # * metodo guardarSaldo()
+
     def guardarSaldo(self, opcion, saldo):
 
-
-        #* Condicional para actualizar el saldo.csv
+        # * Condicional para actualizar el saldo.csv
 
         if opcion == 'consultar':
 
@@ -138,9 +141,9 @@ class Cajero():
 
             # del salida
             escribir.close()
-        
+
         else:
-            #* Sino para agregar los demas movimientos al archivo movimientos.csv
+            # * Sino para agregar los demas movimientos al archivo movimientos.csv
 
             escribir = open('movimientos.csv', 'a', newline='')
 
@@ -159,7 +162,7 @@ class Cajero():
 # * metodo mostrarSaldo()
     def mostrarSaldo(self, opcion):
 
-        #* Condicional para actualizar el saldo.csv
+        # * Condicional para actualizar el saldo.csv
 
         if opcion == 'consultar':
 
@@ -179,7 +182,7 @@ class Cajero():
 
         else:
 
-            #* Sino agrega al diccionario todos los movimientos de movimientos.csv
+            # * Sino agrega al diccionario todos los movimientos de movimientos.csv
 
             with open('movimientos.csv', 'r') as File:
 
@@ -195,13 +198,8 @@ class Cajero():
 
                         self.opciones[f'{row[0]}'] = row[1]
 
-                        #* Ademas para la opcion MOVIMIENTOS, agregar a la lista tambien todos los movimientos.
+                        # * Ademas para la opcion MOVIMIENTOS, agregar a la lista tambien todos los movimientos.
                         self.movimientos.extend([[row[0], row[1]]])
 
 
-
-
-                    
-
 # *****************************************************************
-
