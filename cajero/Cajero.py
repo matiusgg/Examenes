@@ -7,6 +7,8 @@ class Cajero():
 
         self.opciones = {}
 
+    # def
+
 
 
     

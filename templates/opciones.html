@@ -22,7 +22,28 @@ OPCIONES
 
 <h1>ESCOJA ENTRE LAS SIGUIENTES OPCIONES</h1>
 
-<h3>Opciones:</h3>
+
+
+        {% for i in opciones %}
+
+        <form action="{{ url_for('opciones') }}" method="post">
+
+        <br>
+
+        <button type="submit">
+            
+            {{ i }}
+
+            <input type="hidden" name="opcion" value="{{ i }}">
+
+        </button>
+
+    </form>
+
+        {% endfor %}
+
+
+
 
 
 

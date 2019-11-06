@@ -58,7 +58,56 @@ def homeUsuario():
 @app.route('/opciones')
 def opciones():
 
+    global opciones
+
+    opciones = ['ingresar', 'consultar', 'retirar', 'movimientos']
+
+    return render_template('opciones.html', opciones=opciones)
+
+# *****************************************
+
+@app.route('/opciones', methods=['POST'])
+def opcionesEscogida():
+
+    opcion = request.form['opcion']
+
+    for i in opciones:
+
+        if i == opcion:
+
+            return redirect(url_for(f'{opcion}'))
+
     return render_template('opciones.html')
+
+
+# *****************************************
+
+@app.route('/ingresar')
+def ingresar():
+
+    return render_template('ingresar.html')
+
+# *****************************************
+
+@app.route('/consultar')
+def consultar():
+
+    return render_template('consultar.html')
+
+
+# *****************************************
+
+@app.route('/retirar')
+def retirar():
+
+    return render_template('retirar.html')
+
+# *****************************************
+
+@app.route('/movimientos')
+def movimientos():
+
+    return render_template('movimientos.html')
 
 
 # *****************************************
