@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+<!--*********************************************-->
+
+{% block title %}
+
+INGRESAR
+
+{% endblock %}
+
+<!--*********************************************-->
+
+{% block header %}
+
+<h1 class="title is-2" >BANCO INC.</h1>
+
+{% endblock %}
+
+<!--*********************************************-->
+
+
+{% block main %}
+
+<div class="contenedor" >
+
+<!--form-->
+<form action="{{ url_for('ingresar') }}" method="post">
+
+        <label for="retirar">
+            <h2 class="title is-4">INGRESA LA CANTIDAD A INGRESAR</h2>
+        </label>
+    
+        <!--*********************************************-->
+        <!--*input-->
+    <div class="field">
+            <div class="control">
+              <input class="input is-primary" type="number" name="ingresar" required>
+            </div>
+          </div>
+
+   
+
+    <!--*********************************************-->
+    
+        <button class="button is-primary" id="botonaccion" type="submit">INGRESAR</button>
+
+        <br>
+    
+    </form>
+    <!--volver-->
+    <a class="button is-link is-rounded" id="volver" href="{{ url_for('opciones') }}">VOLVER</a>
+
+    <br>
+    <!--INGRESAR-->
+    <h1 class="title is-2">{{ ingresar }}</h1>
+
+    </div>
+
+{% endblock %}
+
+<!--*********************************************-->

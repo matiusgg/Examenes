@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+
+<!--************************************************-->
+
+{% block title %}
+
+MOVIMIENTOS
+
+{% endblock %}
+
+<!--************************************************-->
+
+{% block header %}
+
+<h1 class="title is-2" >MOVIMIENTOS</h1>
+
+{% endblock %}
+
+<!--************************************************-->
+
+{% block main %}
+
+<div class="contenedor" >
+
+
+
+<!--************************************************-->
+<!--* Si ULTIMOSREGISTROS es igual a '10', muestrame los ultimos 10 movimientos que hicimos en la clase Cajero-->
+{% if movimientos|length > 10 %}
+
+<h1 class="title is-4">Aqui estan tus ultimos 10 movimientos: </h1>
+
+<!--****************************-->
+
+{% for i in movimientos %}
+
+<br>
+
+<h2 class="title is-5"> * movimiento: {{ i[0] }}, saldo en ese momento: {{ i[1] }} *</h2>
+
+<br>
+
+{% endfor %}
+
+<!--************************-->
+
+<!--*Si no hay 10 o mas movimientos, muestrame solo los que hay.-->
+{% else %}
+
+<!--************************************************-->
+
+<h1 class="title is-4">Aqui estan tus movimientos: </h1>
+
+{% for i in movimientos %}
+
+<br>
+
+<h2 class="title is-5">movimiento: {{ i[0] }}, saldo en ese momento: {{ i[1] }}</h2>
+
+<br>
+
+{% endfor %}
+
+<!--************************************************-->
+
+{% endif%}
+
+<!--************************************************-->
+
+<a class="button is-link is-rounded" id="volver" href="{{ url_for('opciones') }}">VOLVER</a>
+
+</div>
+
+{% endblock %}
+
+<!--************************************************-->

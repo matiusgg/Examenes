@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+<!--*********************************************-->
+
+{% block title %}
+
+RETIRAR
+
+{% endblock %}
+
+<!--*********************************************-->
+
+{% block header %}
+
+<h1 class="title is-2">RETIRAR DINERO</h1>
+
+{% endblock %}
+
+<!--*********************************************-->
+
+
+{% block main %}
+
+<div class="contenedor" >
+
+
+<!--*form-->
+<form action="{{ url_for('retirar') }}" method="post">
+
+    <label for="retirar">
+        <h2 class="title is-4">INGRESA LA CANTIDAD A RETIRAR</h2>
+    </label>
+
+    <!--*********************************************-->
+    <!--*input-->
+    <div class="field">
+            <div class="control">
+              <input class="input is-primary" type="number" name="retirar" required>
+            </div>
+          </div>
+
+   
+
+    <!--*********************************************-->
+
+    <button class="button is-primary" id="botonaccion" type="submit">RETIRAR</button>
+
+    <br>
+
+</form>
+
+<!--volver-->
+<a class="button is-link is-rounded" id="volver" href="{{ url_for('opciones') }}">VOLVER</a>
+
+<br>
+
+<!--RETIRAR-->
+<h1 class="title is-2">{{ retirar }}</h1>
+
+<div>
+
+{% endblock %}

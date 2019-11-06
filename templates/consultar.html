@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+<!--*********************************************-->
+
+{% block title %}
+
+CONSULTA
+
+{% endblock %}
+
+<!--*********************************************-->
+
+{% block header %}
+
+<h1 class="title is-2">CONSULTA</h1>
+
+{% endblock %}
+
+<!--*********************************************-->
+
+
+{% block main %}
+
+<div class="contenedor" >
+
+<h2 class="title is-4">Consulta tu saldo: </h2>
+
+<!-- *SALDO ACTUAL*-->
+<h2 class="title is-4"> Tu saldo actual es de: {{ saldo }}</h2>
+
+<!--*volver-->
+<a class="button is-link is-rounded" id="volver" href="{{ url_for('opciones') }}">VOLVER</a>
+
+</div>
+
+
+{% endblock %}
+
+<!--*********************************************-->
