@@ -1,3 +1,7 @@
+'''
+IMPORTANTE LEER: LOS CODIGOS PARA INGRESAR AL CAJERO AUTOMATICO SE ENCUENTRAN EN CUENTAS.JSON EN STATIC/JSON
+'''
+
 # *libreria Flask
 from flask import Flask, request, make_response, redirect, render_template, session, url_for
 # *JSON
@@ -40,7 +44,7 @@ def homeUsuario():
 
     # * en el archivo CUENTAS.json estan los datos de las cuentas de los usuarios: nombre, codigo y numero de targeta.
     # * El codigo sera con el cual podra acceder al cajero Automatico.
-    #* SI QUIERES VER LOS CODIGOS DE LOS USUARIOS VE A CUENTAS.JSON
+    # * SI QUIERES VER LOS CODIGOS DE LOS USUARIOS VE A CUENTAS.JSON
     with open('static/json/cuentas.json') as contenido:
 
         cuentas = json.load(contenido)
