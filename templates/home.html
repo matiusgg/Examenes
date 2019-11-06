@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+
+CAJERO AUTOMATICO
+
+{% endblock %}
+
+{% block header %}
+
+<h1>BIENVENIDO A TU CAJERO</h1>
+
+{% endblock %}
+
+
+{% block main %}
+
+
+    <img src="{{ url_for('static', filename='img/logoATM.svg')}}" alt="">
+
+    <br>
+
+<form action="{{ url_for('home') }}" method="post">
+
+    <label for="codigo">
+            Ingrese el codigo de su cuenta bancaria: 
+    </label>
+
+    <h3>Recuerde minimo 6 digitos</h3>
+
+    <br>
+
+    <input type="password" name="codigo" required>
+
+    <button type="submit">ENTRAR</button>
+
+    {% if mensaje != '' %}
+
+        <h1>{{ mensaje }}</h1>
+
+    {% endif %}
+
+
+</form>
+
+
+{% endblock %}
