@@ -1,5 +1,5 @@
 from flask import Flask, url_for, session, request, redirect, render_template
-from ahorcado.Ahorcado import Ahorcado
+from dados.Dados import Dados
 import random
 import csv
 #*Importar MONGO DB
@@ -17,7 +17,7 @@ app.config['SECRET_KEY'] = 'SUPER SECRETO'
 
 #**************************************
 #* ULR Conexion
-MONGO_URL_ATLAS = 'mongodb+srv://mongodb:mongodb@cluster0-yxtud.mongodb.net/test?retryWrites=true&w=majority'
+MONGO_URL_ATLAS = 'mongodb+srv://mongodb:mongodb@cluster0-l6v7e.mongodb.net/test?retryWrites=true&w=majority'
 
 #* Establecer conexion
 client = MongoClient(MONGO_URL_ATLAS, ssl_cert_reqs=False)
@@ -26,7 +26,7 @@ client = MongoClient(MONGO_URL_ATLAS, ssl_cert_reqs=False)
 db = client['ahorcadito']
 
 #* Creacion coleccion
-collection = db['palabras']
+collectionUsuarios = db['usuarios']
 
 
 #******************************************
@@ -46,7 +46,7 @@ def home():
 
     if 'usuario' in session:
 
-        return redirect(url_for('usuario'))
+        return redirect(url_for('juegoDados'))
 
     return render_template('home.html')
 
@@ -56,65 +56,43 @@ def usuario():
     return render_template('usuario.html')
 
 #******************************************
-@app.route('/usuario', methods=['GET', 'POST'])
+@app.route('/usuario', methods=['POST'])
 def usuariodatos():
 
-    if request.method == 'POST':
+    #* Lista que almacena al usuario
+    listaUsuarioCorrecto = []
 
-        try:
-            usuario = request.form['usuario']
-            password = request.form['password']
+    usuario = request.form['usuario']
 
-            #* IMPORTANTE: cADA VEZ QUE HAGAS UNA QUERY HAY CREAR UN NUEVO OBJETO
-            bd = Ahorcado('localhost', 'usuario', 'mysql', 'ahorcadito')
-            #* #* Comprobar en mysql si existe el email
-            leer_usuario = bd.query(
-                f'SELECT usuario from usuarios WHERE usuario="{usuario}"'
-            )
+    leer_usuario = collectionUsuarios.find( {'usuario':f'{usuario}'} )
 
-            print(leer_usuario)
+    # print(list(leer_usuario))
 
-            #* Si en la BD no esta vacio, entonces el email que se ingreso en el input existe en la BD
-            if leer_usuario != ():
+    for i in leer_usuario:
 
-                # * Segunda comprbacion si la primera esta bien
-                # *Comprobacion de email y password en la misma tupla.
-                bd_total = Ahorcado('localhost', 'usuario', 'mysql', 'ahorcadito')
-                leer_usuario_password = bd_total.query(
-                f'SELECT usuario, contrasenya, id_usuario FROM usuarios WHERE usuario="{usuario}"'
-                )
+        print(i['usuario'])
+        listaUsuarioCorrecto.append(i['usuario'])
 
-                print(leer_usuario_password)
+    # print(listaUsuarioCorrecto[0])
+
+    if listaUsuarioCorrecto != []:
 
 
-                bd = Ahorcado('localhost', 'usuario', 'mysql', 'ahorcadito')
-                #* Comprobar en mysql si existe la constraseña
-                #* No necesita estar en un codicional, ya el condicional te lo hace el WHERE
-                leer_password = bd.query(
-                f'SELECT contrasenya from usuarios WHERE contrasenya="{password}"')
+        if listaUsuarioCorrecto[0] == usuario:
+            #* iniciar sesion 
+            #* Limpiamos la session cada vez que haga una nueva session.
+            session.clear()
+            session['usuario'] = usuario
+            print('session creada')
 
-                print(leer_password)
+            # return redirect(url_for('intentos'))
 
-                #* Si el email y la contraseña de la BD son igual al email y contraseña de los inputs. Redireccioname a dentro.html
-                if leer_usuario_password[0][0] == usuario and leer_usuario_password[0][1] == password:
-                    #* iniciar sesion 
-                    #* Limpiamos la session cada vez que haga una nueva session.
-                    session.clear()
-                    session['usuario'] = leer_usuario_password[0][0]
-                    session['password'] = password
-                    session['id'] = leer_usuario_password[0][2]
+        else:
 
-                    return redirect(url_for('ahorcado'))
+            return render_template('usuario.html', no_usuario=True)
+    else:
 
-                else:
-                    return render_template('usuario.html', no_usuario=True)
-            else:
-                return render_template('usuario.html', no_usuario=True)
-
-        #* IndexError nos permite manejar el error cuando el email no esta en la base de datos.
-        except IndexError:
-
-            return 'No existe el usuario en la base de datos'
+        return render_template('usuario.html', no_usuario=True)
 
     return render_template('usuario.html')
 
@@ -134,24 +112,18 @@ def registroDatos():
     if request.method == 'POST':
 
         usuario = request.form['usuario']
-        password = request.form['password']
 
-        bd = Ahorcado('localhost', 'usuario', 'mysql', 'ahorcadito')
+        leer_usuario = collectionUsuarios.find( {'usuario':f'{usuario}'} )
 
-        leer_usuario = bd.query(
-                f'SELECT usuario from usuarios WHERE usuario="{usuario}"'
-        )
+        # print(list(leer_usuario))
 
-
-        print(leer_usuario)
-
-        if leer_usuario != ():
+        #* Si en la BD no esta vacio, entonces el email que se ingreso en el input existe en la BD
+        if list(leer_usuario) != []:
 
             return render_template('registro.html', usuario_existe=True)
 
-        bd2 = Ahorcado('localhost', 'usuario', 'mysql', 'ahorcadito')
-        #* Insertar tupla
-        insertarTupla = bd2.query(f'INSERT INTO usuarios (usuario, contrasenya, activo) VALUES("{usuario}", "{password}", 1);')
+        collectionUsuarios.insert_one({"usuario": usuario})
+
 
         return redirect(url_for('usuario'))
 
@@ -159,7 +131,7 @@ def registroDatos():
 
     return render_template('registro.html')
 
-#******************************************
+# #******************************************
 
 #******************************************
 @app.errorhandler(404)

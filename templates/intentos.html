@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block header %}
+
+<h1>INTENTOS</h1>
+
+{% endblock %}
+
+<!-- ***************************************************-->
+
+{% block main %}
+
+
+
+<br>
+
+
+
+<form action="{{ url_for('home') }}" method="post">
+
+    <button type="submit">VOLVER A HOME</button>
+    
+    </form>
+
+
+{% endblock %}
