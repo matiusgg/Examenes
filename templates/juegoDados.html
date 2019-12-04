@@ -2,14 +2,44 @@
 
 {% block header %}
 
-<h1> juegoDatos</h1>
+<h1> juegoDatos </h1>
 
 {% endblock %}
 
 {% block main %}
 
+<h1>AQUI ESTA TU LANZAMIENTO</h1>
 
 
+<form action="" method="post">
+    <button type="submit">
+
+        LANZAR DADO
+        <input type="hidden" name="activar" value="activar">
+    </button>
+</form>
+
+<h1>Resultados: </h1>
+
+<br>
+
+{{ tipoDado }}
+
+<br>
+
+{{ intento }}
+
+<br>
+
+{{ random }}
+
+{% set tipo = 'img/' +  random  + '.jpg' %}
+
+<img src="{{ url_for('static', filename=tipo)}}" alt="">
+
+<br>
+
+{{ cantidadTotal }}
 
 
 
