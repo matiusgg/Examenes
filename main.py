@@ -178,6 +178,8 @@ def juegoDadosDatos():
 
     # * session usuario
 
+
+
     usuario = session['usuario']
 
     insertarPuntuacion = collectionPuntuacion.insert_one(
