@@ -62,6 +62,8 @@ def crearFichaDatos():
 
     # * Lista con datos de la coleccion de Viviendas
     listaVivienda = []
+    #* '_id' se convertira en STRING para poder hacer el SESSION y hacer la actualización de las medidas, esto más adelante.
+    id_string = ''
 
     # * Datos Propietario
 
@@ -88,7 +90,7 @@ def crearFichaDatos():
     puerta = request.form['puerta']
 
     # * input hidden para generar el CREAR FICHa
-    crear = request.form['crearFicha']
+    crear = 1
 
     #* Diccionario para buscar vivienda
     diccBuscador = {
@@ -114,6 +116,7 @@ def crearFichaDatos():
     for i in list(leer_vivienda):
 
         listaVivienda.append(i)
+        # id_string = str(i['_id'])
 
     print(f'listaVivienda: {listaVivienda}')
 
@@ -143,6 +146,26 @@ def crearFichaDatos():
 
     agregar_vivienda = collectionVivienda.insert_one(nuevaVivienda)
 
+    #* Variable que tendra el query con el documento recien agregado, para extraerle el '_id' que se usara para el SESSION
+    #* el cual me permiti´ra usarlo cuando actualice este documento con las medidas
+    extraer_id = collectionVivienda.find(diccBuscador)
+
+    listaVivienda.clear()
+
+    for ext in list(extraer_id):
+
+        listaVivienda.append(str(ext['_id']))
+
+    #* variable que hará la query, que me permitirá agregarle 'id_vivienda', que lo usaré para medidas.html.
+    agregarID = collectionVivienda.update_one(diccBuscador, {'$set': {'id_vivienda': listaVivienda[0]}})
+
+    if listaVivienda != []:
+
+        print('La lista ha sido limpiada, y se agrego el nuevo documento')
+        print(listaVivienda)
+
+        session['id_documento'] = listaVivienda[0]
+
     return render_template('crearFicha.html', crearFicha=crear)
 
 # ******************************************
@@ -150,6 +173,16 @@ def crearFichaDatos():
 
 @app.route('/medidas')
 def medidas():
+
+    return render_template('medidas.html', id_session=session['id_documento'])
+
+# ******************************************
+
+
+@app.route('/medidas', methods=['POST'])
+def medidasDatos():
+
+
 
     return render_template('medidas.html')
 

@@ -2,7 +2,7 @@
 
 {% block header %}
 
-
+{{ id_session }}
 
 {% endblock %}
 
@@ -11,6 +11,72 @@
 {% block main %}
 
 <div class="contenedor">
+
+    <form action="{{ url_for('medidas') }}" method="post">
+
+        <!--Superficie-->
+
+        <h1>SUPERFICIE</h1>
+
+        <br>
+
+        <!--Superficie/area total vivienda-->
+        <label for="superficietotal">
+            Superficie Total Vivienda (m2)
+            <input type="number" name="superficieTotal" required>
+        </label>
+
+        <br>
+
+        <!--Superficie/Área por habitación-->
+        <label for="superficieHab">
+                Superficie por Habitación (m2)
+                <input type="number" name="superficieHabitacion" required>
+            </label>
+
+            <br>
+
+        <!--Altura Libre-->
+        <label for="altura">
+                Altura de la Vivienda (m)
+                <input type="number" name="altura" required>
+            </label>
+
+            <br>
+
+        <!--Superficie/Área cocina-->
+
+        <label for="cocina">
+                Superficie Total de la Cocina (m2)
+                <input type="number" name="cocina" required>
+            </label>
+
+            <br>
+
+        <!--Superficie/Área sala principal-->
+
+        <label for="salaPrincipal">
+                Superficie Total de la Sala Principal (m2)
+                <input type="number" name="salaPrincipal" required>
+            </label>
+
+            <br>
+
+        <!--Superficie/Área baño-->
+
+        <label for="banyo">
+                Superficie Total del baño (m2)
+                <input type="number" name="banyo" required>
+            </label>
+
+            <br>
+
+        <!--boton de enviar los datos de las medidas-->
+
+        <button type="submit">
+            AGREGAR MEDIDAS A LA FICHA
+        </button>
+    </form>
 
 </div>
 

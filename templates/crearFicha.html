@@ -22,7 +22,7 @@
 
         <label for="propietario">
             Nombre Propietario
-        <input type="text" name="nombrePropietario"  >
+        <input type="text" name="nombrePropietario" required>
         </label>
 
         <br>
@@ -31,7 +31,7 @@
 
         <label for="numeroPropietario">
             Número Propietario
-        <input type="number" name="numeroPropietario"  >
+        <input type="number" name="numeroPropietario" required>
         </label>
 
         <br>
@@ -40,7 +40,7 @@
 
         <label for="dni">
             DNI
-        <input type="number" name="dni"  >
+        <input type="number" name="dni" required>
         </label>
 
         <br>
@@ -49,7 +49,7 @@
 
         <label for="email">
             Email
-        <input type="email" name="email"  >
+        <input type="email" name="email" required>
         </label>
 
         <br>
@@ -62,12 +62,12 @@
 
         <label for="direccion">
             Dirección
-        <input type="text" name="direccion"  >
+        <input type="text" name="direccion" required>
         </label>
 
         <!--Tipo de vivienda-->
 
-        <select name="tipoVivienda"  >
+        <select name="tipoVivienda"  required>
             Tipo de vivienda
             <option value="piso">
                 Piso
@@ -106,7 +106,7 @@
 
         <!--Tipo de Operación que se hará con la vivienda-->
 
-        <select name="operacion"  >
+        <select name="operacion" required>
 
             <option value="alquiler">
                 Alquiler
@@ -125,7 +125,7 @@
 
         <label for="precio">
             Precio
-            <input type="number" name="precio"  >
+            <input type="number" name="precio" required>
         </label>
 
         <br>
@@ -134,12 +134,14 @@
 
         <button type="submit">
             CREAR FICHA 
-            <input type="hidden" name="crearFicha" value=1>
+        
         </button>
 
     </form>
 
     <br>
+
+    {{ crearFicha }}
 
     {% if crearFicha == 1 %}
 
