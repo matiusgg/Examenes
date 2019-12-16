@@ -20,9 +20,18 @@
 
     {% for i in Lista %}
 
-    <h1> {{ i }} </h1>
+    <h1> DATOS PROPIETARIO: {{ i['datosPropietario'] }}</h1>
 
     <br>
+
+    <h1> DATOS VIVIENDA: {{ i['datosVivienda'] }}</h1>
+
+    <br>
+
+    <h1> DATOS MEDIDAS: {{ i['medidasVivienda'] }}</h1>
+
+    <br>
+
 
     {% endfor %}
 
