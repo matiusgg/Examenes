@@ -82,6 +82,83 @@
 
     <br>
 
+    <!--************************************************************-->
+
+    <h1>SI TE SIRVE CALCULAR TUS MEDIDAS, CALCULA LAS MEDIDAS EN ESTA MINI-CALCULADORA</h1>
+
+    <form action="{{ url_for('resultado') }}" method="post">
+
+        <br>
+
+            <!-- titulo -->
+        
+            <h3 class="title is-3">MINICALCULADORA</h3>
+        
+            <!--valor 1-->
+        
+            <div class="field">
+                    <div class="control">
+        
+                            <label class="label">Ingresa el primer numero</label>
+                      <input name="valor1"class="input is-primary" type="number" placeholder="Primary input">
+                    </div>
+                  </div>
+        
+        
+            <!-- operador -->
+        
+            <div class="field">
+                    <div class="control">
+                      <div class="select is-large">
+                        <select name="operador">
+                                <option value="+">
+                                        +
+                                    </option>
+                            
+                                    <option value="-">
+                                     -
+                                    </option>
+                                    
+                                    <option value="*">
+                                     *
+                                    </option>
+                            
+                                    <option value="/">
+                                     /
+                                    </option>
+                        
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+        
+        
+            <!-- valor 2-->
+        
+            <div class="field">
+                <div class="control">
+        
+                        <label class="label">Ingresa el segundo numero</label>
+                    <input name="valor2"class="input is-primary" type="number" placeholder="Primary input" >
+                </div>
+                </div>
+        
+            <!-- calcular -->
+        
+            <div class="control">
+                    <button class="button is-primary">CALCULAR</button>
+                  </div>
+
+                  </form>
+        
+            <br>
+        
+            <h1>RESULTADO DE LA OPERACIÓN: {{ resultado }}</h1>
+
+    <br>
+
+    <!--************************************************************-->
+
     {% if activarVer == 1 %}
 
     <!--IR A verFicha.html-->
@@ -91,6 +168,8 @@
         </button>
 
     {% endif %}
+
+    <!--************************************************************-->
 
     <form action="{{ url_for('home') }}" method="post">
 

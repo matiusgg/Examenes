@@ -1,5 +1,5 @@
 from flask import Flask, url_for, session, request, redirect, render_template
-from inmobiliaria.Inmobiliaria import Inmobiliaria
+from inmobiliaria.Inmobiliaria import InmobiliariaCalc
 import random
 import csv
 # *Importar MONGO DB
@@ -223,9 +223,33 @@ def medidasDatos():
     #* esta variable con el query que agregara al documento recien agregado las medidas que se enviaron.
     retomarDocumento = collectionVivienda.update_one({'id_vivienda': id_vivienda}, {'$set': {'medidasVivienda': diccMedidas}})
 
+    #* SESSION con el resultado de la minicalculadora
+
+    return render_template('medidas.html', activarVer=activarVer, resultado=session['resultado'])
 
 
-    return render_template('medidas.html', activarVer=activarVer)
+# ******************************************
+
+
+@app.route('/resultado', methods=['POST'])
+def resultado():
+
+    #************************
+    #* ESPACIO MINICALCULADORA
+    valor1 = request.form['valor1']
+    operador = request.form['operador']
+    valor2 = request.form['valor2']
+
+    objInmobiliaria = InmobiliariaCalc(int(valor1), operador, int(valor2))
+
+    resultado = objInmobiliaria.resultado()
+
+    session['resultado'] = resultado
+
+    #*************************
+
+    return render_template('resultado.html', resultado=resultado)
+
 
 # ******************************************
 
