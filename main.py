@@ -182,6 +182,30 @@ def medidas():
 @app.route('/medidas', methods=['POST'])
 def medidasDatos():
 
+    #* Datos medidas
+    supTotal = request.form['superficieTotal']
+    supHabitacion = request.form['superficieHabitacion']
+    altura = request.form['altura']
+    cocina = request.form['cocina']
+    salaPrincipal = request.form['salaPrincipal']
+    banyo = request.form['banyo']
+
+    #* Diccionario con la información de las medidas que se convertira en un documento embebido.
+    diccMedidas = {
+        'superficieTotal':supTotal,
+        'superficieHabitacion':supHabitacion,
+        'altura':altura,
+        'cocina':cocina,
+        'salaPrincipal':salaPrincipal,
+        'banyo':banyo
+    }
+
+    #* Variable que tiene el 'id_vivienda' del SESSION
+    id_vivienda = session['id_documento']
+    
+    #* esta variable con el query que agregara al documento recien agregado las medidas que se enviaron.
+    retomarDocumento = collectionVivienda.update_one({'id_vivienda': id_vivienda}, {'$set': {'medidasVivienda': diccMedidas}})
+
 
 
     return render_template('medidas.html')
