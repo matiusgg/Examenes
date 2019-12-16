@@ -196,6 +196,9 @@ def medidas():
 @app.route('/medidas', methods=['POST'])
 def medidasDatos():
 
+    #* variable que alamcena el input:hidden para cuando se oprima el boton para agregar las medidas, salga la opcion de verFicha.html
+    activarVer = 1
+
     #* Datos medidas
     supTotal = request.form['superficieTotal']
     supHabitacion = request.form['superficieHabitacion']
@@ -222,7 +225,7 @@ def medidasDatos():
 
 
 
-    return render_template('medidas.html')
+    return render_template('medidas.html', activarVer=activarVer)
 
 # ******************************************
 
@@ -245,7 +248,7 @@ def verFicha():
 
             listaDocumentos.append(i)
         
-        print(f'VERFICHA, DOCUMENTO ACTUAL: {listaDocumentos}')
+        print(f'VERIFICA, DOCUMENTO ACTUAL: {listaDocumentos}')
 
         return render_template('verFicha.html', actual=True, Lista=listaDocumentos)
 

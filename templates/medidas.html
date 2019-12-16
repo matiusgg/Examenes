@@ -69,6 +69,8 @@
                 <input type="number" name="banyo" required>
             </label>
 
+    
+
             <br>
 
         <!--boton de enviar los datos de las medidas-->
@@ -77,6 +79,18 @@
             AGREGAR MEDIDAS A LA FICHA
         </button>
     </form>
+
+    <br>
+
+    {% if activarVer == 1 %}
+
+    <!--IR A verFicha.html-->
+
+    <button>
+            <a href="{{ url_for('verFicha') }}">VER FICHA CON MEDIDAS</a>
+        </button>
+
+    {% endif %}
 
     <form action="{{ url_for('home') }}" method="post">
 
