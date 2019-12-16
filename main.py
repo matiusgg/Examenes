@@ -28,9 +28,9 @@ client = MongoClient(MONGO_URL_ATLAS, ssl_cert_reqs=False)
 db = client['examen_m4_c2']
 
 # * Creacion coleccion
-collectionUsuarios = db['pisos']
+collectionVivienda = db['viviendas']
 
-#* Coleccion con la información de la Inmobiliaría
+# * Coleccion con la información de la Inmobiliaría
 
 # ******************************************
 @app.route('/')
@@ -38,10 +38,128 @@ def redireccionar():
 
     return redirect(url_for('home'))
 
+# ******************************************
+
+
 @app.route('/home')
 def home():
 
     return render_template('home.html')
+
+# ******************************************
+
+
+@app.route('/crearFicha')
+def crearFicha():
+
+    return render_template('crearFicha.html')
+
+# ******************************************
+
+
+@app.route('/crearFicha', methods=['POST'])
+def crearFichaDatos():
+
+    # * Lista con datos de la coleccion de Viviendas
+    listaVivienda = []
+
+    # * Datos Propietario
+
+    nombrePropietario = request.form['nombrePropietario']
+
+    numeroPropietario = request.form['numeroPropietario']
+
+    email = request.form['email']
+
+    dni = request.form['dni']
+
+    # * Datos Vivienda
+
+    direccion = request.form['direccion']
+
+    tipoVivienda = request.form['tipoVivienda']
+
+    operacion = request.form['operacion']
+
+    precio = request.form['precio']
+
+    planta = request.form['planta']
+
+    puerta = request.form['puerta']
+
+    # * input hidden para generar el CREAR FICHa
+    crear = request.form['crearFicha']
+
+    #* Diccionario para buscar vivienda
+    diccBuscador = {
+        'datosPropietario.propietario':nombrePropietario,
+        'datosPropietario.numero':numeroPropietario,
+        'datosPropietario.dni':dni,
+        'datosPropietario.email':email,
+        'datosVivienda.direccion':direccion,
+        'datosVivienda.tipovivienda':tipoVivienda,
+        'datosVivienda.operacion':operacion,
+        'datosVivienda.precio':precio,
+        'datosVivienda.planta':planta,
+        'datosVivienda.puerta':puerta
+        }
+
+    # * Datos de la vivienda, query a mongoDB
+    leer_vivienda = collectionVivienda.find(diccBuscador)
+
+    print(leer_vivienda)
+
+    # print(list(leer_vivienda))
+
+    for i in list(leer_vivienda):
+
+        listaVivienda.append(i)
+
+    print(f'listaVivienda: {listaVivienda}')
+
+    if listaVivienda != []:
+
+        print('Ya esta registrada la vivienda')
+
+        return render_template('crearFicha.html', vivienda_existe=True)
+
+    
+    nuevaVivienda = {
+        'datosPropietario': {
+            'propietario': nombrePropietario,
+            'numero': numeroPropietario,
+            'dni': dni,
+            'email': email
+        },
+        'datosVivienda': {
+            'direccion': direccion,
+            'tipovivienda': tipoVivienda,
+            'operacion': operacion,
+            'precio': precio,
+            'planta': planta,
+            'puerta': puerta
+        }
+    }
+
+    agregar_vivienda = collectionVivienda.insert_one(nuevaVivienda)
+
+    return render_template('crearFicha.html', crearFicha=crear)
+
+# ******************************************
+
+
+@app.route('/medidas')
+def medidas():
+
+    return render_template('medidas.html')
+
+# ******************************************
+
+
+@app.route('/verFicha')
+def verFicha():
+
+    return render_template('verFicha.html')
 
 
 # ******************************************
