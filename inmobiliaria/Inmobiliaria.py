@@ -2,14 +2,18 @@
 import random
 import os
 
+#* Clase InmobiliariaCalc
+
 class InmobiliariaCalc():
 
+    #* Constructor
     def __init__(self, valor1, operador, valor2):
 
         self.valor1 = valor1
         self.operador = operador
         self.valor2 = valor2
 
+    #* Metodo con el resultado
     def resultado(self):
 
         if self.operador == '+': 
