@@ -47,6 +47,20 @@ def home():
     return render_template('home.html')
 
 # ******************************************
+@app.route('/home', methods=['GET', 'POST'])
+def homeDatos():
+
+    if request.method == 'POST':
+
+        session['id_documento'] = ''
+
+    # if 'usuario' in session:
+
+    #     return redirect(url_for('tipoDados'))
+
+    return render_template('home.html')
+
+# ******************************************
 
 
 @app.route('/crearFicha')
@@ -216,7 +230,70 @@ def medidasDatos():
 @app.route('/verFicha')
 def verFicha():
 
-    return render_template('verFicha.html')
+    #* Lista que contendrá al documento
+    listaDocumentos = []
+
+    #* Variable que tiene el 'id_vivienda' del SESSION
+    id_vivienda = session['id_documento']
+
+    if id_vivienda != '':
+
+        #*variable que tendrá la query del documento recien creado
+        todosDocumentos = collectionVivienda.find({'id_vivienda': id_vivienda})
+
+        for i in list(todosDocumentos):
+
+            listaDocumentos.append(i)
+        
+        print(f'VERFICHA, DOCUMENTO ACTUAL: {listaDocumentos}')
+
+        return render_template('verFicha.html', actual=True, Lista=listaDocumentos)
+
+    else:
+
+        return render_template('verFicha.html', actual=False)
+
+    return render_template('verFicha.html', actual=False)
+
+# ******************************************
+
+
+@app.route('/verFicha', methods=['POST'])
+def verFichaDatos():
+
+    #* Lista que almacenará los resultados de la busqueda
+    listaBusqueda = []
+
+    #* variables con los datos de los inputs de la busqueda
+    nombrePropietario = request.form['nombrePropietario']
+    dni = request.form['dni']
+    tipoVivienda = request.form['tipoVivienda']
+    operacion = request.form['operacion']
+
+    #*Diccionario que recopila los datos de los inputs
+    diccBusqueda = {
+        'datosPropietario.propietario':nombrePropietario,
+        'datosPropietario.dni':dni,
+        # 'datosVivienda.direccion':direccion,
+        'datosVivienda.tipovivienda':tipoVivienda,
+        'datosVivienda.operacion':operacion,
+    }
+
+    #* query que permitirá hacer el filtro
+    filtroBusqueda = collectionVivienda.find(diccBusqueda)
+
+    for i in list(filtroBusqueda):
+
+        listaBusqueda.append(i)
+
+    print(f'lsitaBusqueda: {listaBusqueda}')
+
+    if listaBusqueda != []:
+
+        return render_template('verFicha.html', actual=False, listaBusqueda=listaBusqueda)
+
+    return render_template('verFicha.html', actual=False)
+
 
 
 # ******************************************

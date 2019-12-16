@@ -65,6 +65,8 @@
         <input type="text" name="direccion" required>
         </label>
 
+        <br>
+
         <!--Tipo de vivienda-->
 
         <select name="tipoVivienda"  required>
@@ -139,6 +141,8 @@
 
     </form>
 
+    <!--*************************************************************-->
+
     <br>
 
     {{ crearFicha }}
@@ -161,6 +165,8 @@
 
     {% endif %}
 
+    <!--*************************************************************-->
+
     <br>
 
     {% if vivienda_existe == True %}
@@ -168,6 +174,20 @@
     <h1>ESTA VIVIENDA YA ESTA REGISTRADA!!!</h1>
 
     {% endif %}
+
+    <br>
+
+    <!--*************************************************************-->
+
+    <form action="{{ url_for('home') }}" method="post">
+
+            <button>
+                    VOLVER
+                </button>
+        
+            </form>
+
+    <!--*************************************************************-->
 
 </div>
 

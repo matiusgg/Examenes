@@ -12,6 +12,116 @@
 
 <div class="contenedor">
 
+    <!--*************************************************************-->
+    
+    {% if actual == True %}
+
+    <h1>AQUI ESTA LA INFORMACIÓN DE LA VIVIENDA</h1>
+
+    {% for i in Lista %}
+
+    <h1> {{ i }} </h1>
+
+    <br>
+
+    {% endfor %}
+
+    {% endif %}
+
+    <!--*************************************************************-->
+
+    {% if actual == False %}
+
+    <form action="{{ url_for('verFicha') }}" method="post">
+
+    <h1>BUSCAR VIVIENDAS: </h1>
+
+    <!--FILTROS: -->
+
+        <!--Tipo de Operación que se hará con la vivienda-->
+
+        <select name="operacion" required>
+
+                <option value="alquiler">
+                    Alquiler
+                </option>
+                <option value="Venta">
+                    Venta
+                </option>
+                <option value="mantenimiento">
+                    Mantenimiento
+                </option>
+            </select>
+
+            <br>
+
+            <!--Tipo de vivienda-->
+
+        <select name="tipoVivienda"  required>
+                Tipo de vivienda
+                <option value="piso">
+                    Piso
+                </option>
+    
+                <option value="finca">
+                    Finca
+                </option>
+    
+                <option value="mansion">
+                    Mansión
+                </option>
+            </select>
+    
+            <br>
+
+        <!--DNI Propietario-->
+
+        <label for="dni">
+                DNI
+            <input type="number" name="dni" required>
+            </label>
+    
+            <br>
+
+            <!--Nombre Propietario-->
+
+        <label for="propietario">
+                Nombre Propietario
+            <input type="text" name="nombrePropietario" required>
+            </label>
+    
+            <br>
+
+        <button type="submit">
+            BUSCAR
+        </button>
+
+    </form>
+
+    <br>
+
+    {% for i in listaBusqueda %}
+
+    <h1>{{ i }}</h1>
+
+    <br>
+
+    {% endfor %}
+
+    {% endif %}
+
+    <!--*************************************************************-->
+
+    <form action="{{ url_for('home') }}" method="post">
+
+            <button>
+                    VOLVER
+                </button>
+        
+            </form>
+
+            <!--*************************************************************-->
+
 </div>
 
 {% endblock %}
