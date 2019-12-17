@@ -284,7 +284,6 @@ def verFicha():
 
 # ******************************************
 
-
 @app.route('/verFicha', methods=['POST'])
 def verFichaDatos():
 
