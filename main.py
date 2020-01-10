@@ -28,13 +28,16 @@ MONGO_URL_ATLAS = 'mongodb+srv://mongodb:mongodb@cluster0-l6v7e.mongodb.net/test
 client = MongoClient(MONGO_URL_ATLAS, ssl_cert_reqs=False)
 
 # * Creacion base de datos
-db = client['ahorcadito']
+db = client['examen_m4_c1']
 
 # * Creacion coleccion
 collectionUsuarios = db['usuarios']
 
 # * Creacion coleccion
 collectionPuntuacion = db['puntuacion']
+
+#* coleccion de cantidad de dados y con su tipo de dados
+collectionTipos = db['cantidad']
 
 
 # ******************************************
@@ -146,6 +149,21 @@ def tipoDados():
 
 # *****************************************
 
+@app.route('/tipoDados', methods=['POST'])
+def tipoDadosLlegada():
+
+    for i in listaTipos:
+
+        if i in request.form[f'tipo']:
+
+            tipo = request.form[f'tipo']
+            cantidad = request.form[f'cantidad{i}']
+
+            print(f'tipo: {tipo}, cantidad: {cantidad}')
+
+    return render_template('tipoDados.html')
+
+
 # ******************************************
 @app.route('/juegoDados')
 def juegoDados():
@@ -168,13 +186,17 @@ def juegoDadosDatos():
 
     for i in listaTipos:
 
-        tipo = request.form[f'{i}']
-        cantidad = request.form[f'cantidad{i}']
+        if request.form[f'{i}'] != '':
 
-        listaPuntuacion.extend([[tipo, cantidad]])
+            tipo = request.form[f'{i}']
+            cantidad = request.form[f'cantidad{i}']
 
-    (tipoDado, intento, randomCara, cantidadTotal) = objDados.activarJuego(
-        listaPuntuacion, listaTipos, activar)
+            print(f'tipo: {tipo}, cantidad: {cantidad}')
+
+        # listaPuntuacion.extend([[tipo, cantidad]])
+
+    # (tipoDado, intento, randomCara, cantidadTotal) = objDados.activarJuego(
+    #     listaPuntuacion, listaTipos, activar)
 
     # * session usuario
 
@@ -182,8 +204,8 @@ def juegoDadosDatos():
 
     usuario = session['usuario']
 
-    insertarPuntuacion = collectionPuntuacion.insert_one(
-        {'usuario': f'{usuario}', 'tipoDado': f'{tipoDado}', 'intento': f'{intento}', 'randomCara': f'randomCara', 'cantidadTotal': f'{cantidadTotal}'})
+    # insertarPuntuacion = collectionPuntuacion.insert_one(
+    #     {'usuario': f'{usuario}', 'tipoDado': f'{tipoDado}', 'intento': f'{intento}', 'randomCara': f'randomCara', 'cantidadTotal': f'{cantidadTotal}'})
 
     # if intento < cantidadTotal:
 
@@ -191,12 +213,85 @@ def juegoDadosDatos():
 
     # else:
 
-    #     return render_template('juegoDados.html', gameOver=True)
+    return render_template('juegoDados.html', gameOver=True)
 
-    return render_template('juegoDados.html', tipoDado=tipoDado, intento=intento, random=str(randomCara), cantidadTotal=cantidadTotal)
+    # return render_template('juegoDados.html', tipoDado=tipoDado, intento=intento, random=str(randomCara), cantidadTotal=cantidadTotal)
 
 
 # ******************************************
+
+@app.route('/agregar')
+def agregar():
+
+    return render_template('agregar.html')
+# ******************************************
+
+@app.route('/agregar', methods=['POST'])
+def agregarDatos():
+
+    # listaCantidad = []
+
+    cantidad = request.form['cantidad']
+    tipoDado = request.form['tipoDado']
+
+    datosCantidad = {
+    "tipoDado": tipoDado,
+     "cantidad": cantidad
+    }
+
+    buscadorCantidad = {
+        "tipoDado": tipoDado
+        # f"{tipoDado}.cantidad": cantidad 
+        }
+
+    # agregarDatos = collectionTipos.insert_one(datosCantidad)
+
+    # #*lista con ID
+    listaID = []
+
+    verCantidad = collectionTipos.find(buscadorCantidad)
+
+    if list(verCantidad) == []:
+
+        agregarDatos = collectionTipos.insert_one(datosCantidad)
+        print('Se ha añadido un nuevo tipo')
+
+        buscarUnTipo = collectionTipos.find(buscadorCantidad)
+
+        for i in list(buscarUnTipo):
+
+            listaID.append(str(i['_id']))
+
+        actualizarCantidad = collectionTipos.update_one(buscadorCantidad, {"$set": {'id_cantidad': listaID[0]}})
+
+    else:
+
+        print('''Hay más de un documento''')
+
+        listaID.clear()
+
+        buscar = collectionTipos.find(buscadorCantidad)
+
+        for i in list(buscar):
+
+            print(f'diccionario: {i}')
+
+            print('\n')
+
+            listaID.append(int(i['cantidad']))
+
+        print(f'cantidad{listaID}')
+
+        agregarSuma = collectionTipos.update_one(buscadorCantidad, {"$set": {'cantidad': listaID[0]+int(cantidad)}})
+
+    # buscarDeNuevo = collectionTipos.find({'id_cantidad': })
+
+
+
+    return redirect(url_for('tipoDados'))
+
+# ******************************************
+
 @app.errorhandler(404)
 def page_no_found(error):
     return '<h1> Pagina no encontrada, siga buscando</h1>'

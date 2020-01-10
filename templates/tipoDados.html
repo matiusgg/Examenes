@@ -12,39 +12,51 @@
 
 <h1>SELECCIONA CUALES TIPOS DE DADOS QUIERES</h1>
 
-<form action="{{ url_for('juegoDados') }}" method="post">
+
 
 <div class="contenedor">
 
+
+
     {% for i in listaTipos %}
 
+    <form action="{{ url_for('agregar') }}" method="post">
 
                 {% set tipo = 'img/' +  i  + '.jpg' %}
 
                 <img src="{{ url_for('static', filename=tipo)}}" alt="">
 
                 <br>
+                
+            <label for="cantidad{{i}}">
 
-        <label for="cantidad{{i}}">
+            <h2>Cantidad de dados tipo {{ i }}</h2>
 
-            <input type="hidden" name="activar" value="activar">
+            <input type="number" name="cantidad" value=false>
 
-            <input type="hidden" name="{{i}}" value="{{i}}">
+            <!--input que tiene valor el tipo de dado, para saber cual cantidad pertenece a cual tipo de dado.-->
 
-            <input type="number" name="cantidad{{i}}" id="" value=0>
+            <input type="hidden" name="tipoDado" value="{{i}}">
+            
         </label>
+
+        <button>
+            AGREGAR
+        </button>
+
+        </form>
 
     {% endfor %}
 
-
-
-
 <br>
 
+<form action="{{ url_for('juegoDados') }}" method="post">
 
     <button type="submit">
 
-    ESCOGER CANTIDAD DE DADOS
+            <input type="hidden" name="activar" value="activar">
+
+    JUGAR
 
     </button>
 
