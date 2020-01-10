@@ -54,9 +54,9 @@ def home():
 
         session.clear()
 
-    # if 'usuario' in session:
+    if 'usuario' in session:
 
-    #     return redirect(url_for('tipoDados'))
+        return redirect(url_for('tipoDados'))
 
     return render_template('home.html')
 
@@ -236,7 +236,8 @@ def agregarDatos():
 
     datosCantidad = {
     "tipoDado": tipoDado,
-     "cantidad": cantidad
+     "cantidad": cantidad,
+     "usuario": session['usuario']
     }
 
     buscadorCantidad = {
