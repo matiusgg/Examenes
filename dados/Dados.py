@@ -35,7 +35,12 @@ class Dados():
         self.intentos = 0
 
         #* Lista con tipos de dados
-        self.tiposDados = ['cuatro', 'seis', 'ocho', 'diez']
+        self.tiposDados = {
+            'cuatro': 4, 
+            'seis': 6, 
+            'ocho': 8, 
+            'diez': 10
+            }
 
 
     def activarJuego(self):
@@ -44,20 +49,34 @@ class Dados():
 
         if self.activar == 'activar':
 
-            for tipo in self.tiposConCantidad:
+            if self.tiposConCantidad != []:
 
-                if tipo['tipoDado'] == 'cuatro':
+                for tipo in self.tiposConCantidad:
 
-                    randomCara = random.randint(1, 4)
+                    for nombreTipo, valorTipo in self.tiposDados.items():
 
-                    if int(tipo['cantidad']) > 0:
+                        if tipo['tipoDado'] == nombreTipo:
 
-                        restarCantidad = self.collectionTipos.update_one({'tipoDado': tipo['tipoDado'], 'usuario': self.usuario}, {"$set": {'cantidad': int(tipo['cantidad'])-1}})
+                            randomCara = random.randint(1, valorTipo)
 
-                        print('SE ha restado un intento por el tipo de cara: Cuatro')
+                            if int(tipo['cantidad']) > 0:
+
+                                restarCantidad = self.collectionTipos.update_one({'tipoDado': tipo['tipoDado'], 'usuario': self.usuario}, {"$set": {'cantidad': int(tipo['cantidad'])-1}})
+
+                                print('SE ha restado un intento por el tipo de cara: Cuatro')
                         
-                        return tipo['tipoDado'], randomCara, tipo['cantidad']
+                                return tipo['tipoDado'], randomCara, tipo['cantidad']
                     
-                    if int(tipo['cantidad']) == 0:
+                            if int(tipo['cantidad']) == 0:
 
-                        return tipo['tipoDado'], 0, tipo['cantidad']
+                                eliminarTipo = self.collectionTipos.delete_one({'tipoDado': tipo['tipoDado'], 'usuario': self.usuario})
+
+                                return tipo['tipoDado'], 0, tipo['cantidad']
+
+            else:
+
+                return 'game over', 0, '1'
+
+
+            
+
