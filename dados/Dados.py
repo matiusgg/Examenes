@@ -50,14 +50,14 @@ class Dados():
 
                     randomCara = random.randint(1, 4)
 
-                    if tipo['cantidad'] > 0:
+                    if int(tipo['cantidad']) > 0:
 
-                        restarCantidad = self.collectionTipos.update_one({'tipoDado': tipo['tipoDado'], 'usuario': self.usuario}, {"$set": {'cantidad': tipo['cantidad']-1}})
+                        restarCantidad = self.collectionTipos.update_one({'tipoDado': tipo['tipoDado'], 'usuario': self.usuario}, {"$set": {'cantidad': int(tipo['cantidad'])-1}})
 
                         print('SE ha restado un intento por el tipo de cara: Cuatro')
                         
                         return tipo['tipoDado'], randomCara, tipo['cantidad']
                     
-                    if tipo['cantidad'] == 0:
+                    if int(tipo['cantidad']) == 0:
 
                         return tipo['tipoDado'], 0, tipo['cantidad']
