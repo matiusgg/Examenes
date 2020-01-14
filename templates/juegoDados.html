@@ -11,7 +11,7 @@
 <h1>AQUI ESTA TU LANZAMIENTO</h1>
 
 
-<form action="" method="post">
+<form action="{{ url_for('juegoDados') }}" method="post">
     <button type="submit">
 
         LANZAR DADO
@@ -23,23 +23,39 @@
 
 <br>
 
+<h1>Tipo de dado</h1>
+
 {{ tipoDado }}
 
 <br>
+
+<h1>Intento: </h1>
 
 {{ intento }}
 
 <br>
 
-{{ random }}
+<h1>Numero de cara: </h1>
 
-{% set tipo = 'img/' +  random  + '.jpg' %}
+{{ numCara }}
+
+{% set tipo = 'img/' +  numCara  + '.jpg' %}
 
 <img src="{{ url_for('static', filename=tipo)}}" alt="">
 
 <br>
 
-{{ cantidadTotal }}
+{% if numCara == '0' %}
+<h1>Se han acabado los intentos del tipo {{ tipoDado }}</h1>
+{% endif %}
+
+<br>
+
+<form action="{{ url_for('home') }}" method="post">
+
+    <button type="submit">VOLVER A HOME</button>
+    
+    </form>
 
 
 

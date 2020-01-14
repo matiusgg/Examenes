@@ -147,23 +147,6 @@ def tipoDados():
     return render_template('tipoDados.html', listaTipos=listaTipos)
 
 
-# *****************************************
-
-@app.route('/tipoDados', methods=['POST'])
-def tipoDadosLlegada():
-
-    for i in listaTipos:
-
-        if i in request.form[f'tipo']:
-
-            tipo = request.form[f'tipo']
-            cantidad = request.form[f'cantidad{i}']
-
-            print(f'tipo: {tipo}, cantidad: {cantidad}')
-
-    return render_template('tipoDados.html')
-
-
 # ******************************************
 @app.route('/juegoDados')
 def juegoDados():
@@ -179,43 +162,15 @@ def juegoDadosDatos():
 
     activar = request.form['activar']
 
+    tiposConCantidad = collectionTipos.find({'usuario': session['usuario']})
+
     # * Objeto juego Dados
-    objDados = Dados()
+    objDados = Dados(activar, list(tiposConCantidad), collectionTipos, session['usuario'])
 
-    listaPuntuacion = []
+    #* metodo con los resultados
+    (tipoDado, numCara, intentos) = objDados.activarJuego()
 
-    for i in listaTipos:
-
-        if request.form[f'{i}'] != '':
-
-            tipo = request.form[f'{i}']
-            cantidad = request.form[f'cantidad{i}']
-
-            print(f'tipo: {tipo}, cantidad: {cantidad}')
-
-        # listaPuntuacion.extend([[tipo, cantidad]])
-
-    # (tipoDado, intento, randomCara, cantidadTotal) = objDados.activarJuego(
-    #     listaPuntuacion, listaTipos, activar)
-
-    # * session usuario
-
-
-
-    usuario = session['usuario']
-
-    # insertarPuntuacion = collectionPuntuacion.insert_one(
-    #     {'usuario': f'{usuario}', 'tipoDado': f'{tipoDado}', 'intento': f'{intento}', 'randomCara': f'randomCara', 'cantidadTotal': f'{cantidadTotal}'})
-
-    # if intento < cantidadTotal:
-
-    #     return render_template('juegoDatos.html', tipoDado=tipoDado, intento=intento, random=randomCara, cantidadTotal=cantidadTotal)
-
-    # else:
-
-    return render_template('juegoDados.html', gameOver=True)
-
-    # return render_template('juegoDados.html', tipoDado=tipoDado, intento=intento, random=str(randomCara), cantidadTotal=cantidadTotal)
+    return render_template('juegoDados.html', tipoDado=tipoDado, numCara=str(numCara), intentos=intentos)
 
 
 # ******************************************

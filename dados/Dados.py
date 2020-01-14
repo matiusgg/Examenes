@@ -4,20 +4,29 @@ import csv
 
 class Dados():
 
-    def __init__(self):
+    def __init__(self, activar, tiposConCantidad, collectionTipos, usuario):
+
+        #* usuario mediante session
+        self.usuario = usuario
+
+        #* BD de mongoDB
+        self.collectionTipos = collectionTipos
+
+        #* Input hidden Activar
+        self.activar = activar
 
         #*Lista donde ira la puntuación del usuario
         self.listaPuntuacion = []
 
         #*Lista donde ira el números de caras según el tipo que escogio el usuario
-        self.NumCaras = []
+        self.NumCaras = ['uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez']
 
         #*Lista con los tipos de dados que si tiene una cantidad
-        self.tiposConCantidad = []
+        self.tiposConCantidad = tiposConCantidad
 
 
         #* Random no iniciado sobre la cual cara sacara
-        self.randomCara = 0
+        self.randomCara = random.choice(self.NumCaras)
 
         #*Cantidad total de veces
         self.cantidadTotal = 0
@@ -25,77 +34,30 @@ class Dados():
         #* números de intentos
         self.intentos = 0
 
-    def activarJuego(self, listaPuntuacion, listaTipos, activar):
+        #* Lista con tipos de dados
+        self.tiposDados = ['cuatro', 'seis', 'ocho', 'diez']
+
+
+    def activarJuego(self):
 
         cantidadCaras = 0
 
-        if activar == 'activar':
+        if self.activar == 'activar':
 
-            print(listaPuntuacion)
+            for tipo in self.tiposConCantidad:
 
-            for i in listaPuntuacion:
+                if tipo['tipoDado'] == 'cuatro':
 
-                if i[1] == '0':
+                    randomCara = random.randint(1, 4)
 
-                    print(f'No se coloco una cantidad en este tipo: {i[0]}')
-            
-                else:
+                    if tipo['cantidad'] > 0:
 
-                    self.tiposConCantidad.append(i)
+                        restarCantidad = self.collectionTipos.update_one({'tipoDado': tipo['tipoDado'], 'usuario': self.usuario}, {"$set": {'cantidad': tipo['cantidad']-1}})
 
-            for i in self.tiposConCantidad:
+                        print('SE ha restado un intento por el tipo de cara: Cuatro')
+                        
+                        return tipo['tipoDado'], randomCara, tipo['cantidad']
+                    
+                    if tipo['cantidad'] == 0:
 
-                print('****???*****')
-                print(i)
-
-                self.cantidadTotal += int(i[1])
-
-            for i in self.tiposConCantidad:
-
-                if i[0] == 'cuatro':
-
-                    cantidadCaras = 4
-                    self.randomCara = random.randint(0, cantidadCaras)
-
-                    print(self.randomCara)
-
-                    self.intentos += 1
-
-                    return i[0], self.intentos, self.randomCara, self.cantidadTotal
-
-            
-                if i[0] == 'seis':
-
-                    cantidadCaras = 6
-                    self.randomCara = random.randint(0, cantidadCaras)
-
-                    print(self.randomCara)
-
-                    self.intentos += 1
-
-                    return i[0], self.intentos, self.randomCara, self.cantidadTotal
-
-                if i[0] == 'ocho':
-
-                    cantidadCaras = 8
-                    self.randomCara = random.randint(0, cantidadCaras)
-
-                    print(self.randomCara)
-
-                    self.intentos += 1
-
-                    return i[0], self.intentos, self.randomCara, self.cantidadTotal
-
-                if i[0] == 'diez':
-
-                    cantidadCaras = 10
-                    self.randomCara = random.randint(0, cantidadCaras)
-
-                    print(self.randomCara)
-
-                    self.intentos += 1
-
-                    return i[0], self.intentos, self.randomCara, self.cantidadTotal
-
-
-
+                        return tipo['tipoDado'], 0, tipo['cantidad']
