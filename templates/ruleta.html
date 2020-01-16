@@ -42,22 +42,26 @@ RULETA
 
         <div class="titulo">
 
+     
+
             <h3 class="title is-5">TU RESULTADO FUE: </h3>
 
-            <h3 class="title is-5">{{ opcion }}</h3>
+            <h3 class="title is-5">{{ datos[0] }}</h3>
             
-            {% set pngOpcion = 'img/' + opcion + '.png' %}
+            {% set pngOpcion = 'img/' + datos[0] + '.png' %}
     
             <img src="{{ url_for('static', filename=pngOpcion) }}" alt="" class="pngopcion">
 
 
 
-            <h3 class="title is-5">{{ splitOpcion }}</h3>
+            <h3 class="title is-5">{{ datos[1] }}</h3>
 
-            <h3 class="title is-5">{{ resultado }}</h3>
+            <h3 class="title is-5">{{ datos[2] }}</h3>
 
 
             </div>
+
+            <h3 class="title is-5">TU SCORE ES: {{ score[0] }}</h3>
 
         <!-- Boton Salir-->
 
