@@ -65,7 +65,15 @@ RULETA
 
         <!-- Boton Salir-->
 
-        <button class="button is-primary"><a href="{{ url_for('home') }}">SALIR</a></button>
+        <br>
+
+
+
+<form action="{{ url_for('home') }}" method="post">
+
+    <button type="submit">VOLVER A HOME</button>
+    
+    </form>
 
     
     </div>

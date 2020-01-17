@@ -169,33 +169,73 @@ def opciones():
 
 # *****************************************
 
+# *Ruta opciones
+@app.route('/opciones', methods=['POST'])
+def opcionesDatos():
+
+    opcion = request.form['opcion']
+
+    usuario = session['usuario']
+
+    queryOpciones = collectionUsuarios.find({'usuario': usuario, f'opcionesUsuarios.{opcion}': opcion})
+        
+
+    if list(queryOpciones) == []:
+
+       agregarOpcion = collectionUsuarios.update_one({'usuario': usuario}, {"$set": {f'opcionesUsuarios.{opcion}': opcion}})
+
+       print('Se ha agregado la nueva opción')
+
+    else:
+        print('''Ya se encuentra esta opcion agregada''')
+
+    return redirect(url_for('opciones'))
+
+# *****************************************
+
 # *Ruta INTENTOS
 @app.route('/intentos')
 def intentos():
 
     return render_template('intentos.html')
+    
 
 # *****************************************
 
 # # *Ruta LLEGADA POST INTENTOS
-# @app.route('/intentos', methods=['POST'])
-# def llegadaIntentos():
+@app.route('/intentos', methods=['POST'])
+def llegadaIntentos():
 
-#     # * Variables globales
-#     global intento
+    # * Variables globales
+    global activar
+
+    #* input hidden activar
+    activar = request.form['activar']
     
-#     # * Modo intento escogido
-#     intento = request.form['intento']
+    # * Modo intento escogido
+    intento = request.form['intento']
 
-#     # * Redireccion a la ruta 'RULETA'
-#     return redirect(url_for('ruleta'))
+    # Objeto
+    ruletaObj = Ruleta(collectionUsuarios, session['usuario'], intento)
+
+    #* metodo intentos
+    registrarIntentos = ruletaObj.intentos(intento)
+
+    # * Redireccion a la ruta 'RULETA'
+    return redirect(url_for('ruleta'))
 
 # *****************************************
 
 # *Ruta RULETA
-@app.route('/ruleta')
+@app.route('/ruleta', methods=['GET'])
 def ruleta():
 
+    #* Nuevo objeto para activar el juego
+    ruletaObj = Ruleta(collectionUsuarios, session['usuario'])
+
+    #* metodo Juego
+    activarJuego = ruletaObj.Juego(activar)
+    
     return render_template('ruleta.html')
 
 # *****************************************

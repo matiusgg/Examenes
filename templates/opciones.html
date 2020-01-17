@@ -34,8 +34,6 @@ OPCIONES USUARIO
 
                     <br>
 
-                    <div class="contenedorimagenes"></div>
-
                     <!--Opciones que escoge el usuario -->
 
                     {% for opcion in opcionesUsuario %}
@@ -43,8 +41,18 @@ OPCIONES USUARIO
     <h3 class="title is-5">{{ opcion }}</h3>
 
     {% set pngOpcion = 'img/' + opcion + '.png' %}
+
+    <form action="{{ url_for('opciones') }}" method="post">
+
+        <button type="submit">
     
-    <img src="{{ url_for('static', filename=pngOpcion)}}" alt="" class="pngopcion">
+            <img src="{{ url_for('static', filename=pngOpcion)}}" alt="" class="pngopcion">
+
+            <input type="hidden" name="opcion" value="{{ opcion }}">
+
+        </button>
+
+    </form>
 
                     {% endfor %}
 
@@ -54,6 +62,18 @@ OPCIONES USUARIO
 
 
           <button class="button is-primary"><a href="{{ url_for('intentos') }}">MODO INTENTOS</a></button>
+
+          <!--Volver a Home-->
+
+          <br>
+
+
+
+<form action="{{ url_for('home') }}" method="post">
+
+    <button type="submit">VOLVER A HOME</button>
+    
+    </form>
 
     
     </div>

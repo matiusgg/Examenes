@@ -10,11 +10,11 @@ import csv
 
 class Ruleta():
 
-    def __init__(self):
+    def __init__(self, collection, usuario):
 
         # * Diccionario Opciones
 
-        opcionesDicc = {
+        self.opcionesDicc = {
             'suma': {
                 'dinero 1000': 1000,
                 'dinero 500': 500,
@@ -37,25 +37,38 @@ class Ruleta():
         self.OPCIONES = ['dinero 1000', "pierdes", 'dinero Mitad',
                          "x2", 'dinero 500', 'dinero 200', 'carcel', 'dinero 5000', 'dinero 100', 'coche', 'ordenador', 'nevera', 'moto', 'bicicleta', 'saltar', 'bote', 'bote x2']
 
+        #* collection mongodb
+        self.collection = collection
+
+        #* usuario
+        self.usuario = usuario
+
+        #* random resultado
+        self.randomOpcion = random.choice(self.OPCIONES)
+
     #*************************************
 
-    def Programa(self):
+    def definirIntentos(self, intento):
 
-        if self.inputRuleta == 'activar':
+        if intentos == 7:
 
-            randomOpcion = random.choice(self.OPCIONES)
 
-            for llaveDinero, valorDinero in self.opcionesDicc.items():
+            registrarIntentos = self.collection.update_one({'usuario': self.usuario}, {"$set": {'intentos': intentos}})
 
-                if randomOpcion == llaveDinero:
+        if intentos == 'infinito':
 
-                    escribir = open('dinero.csv', 'a', newline='')
+            registrarIntentos = self.collection.update_one({'usuario': self.usuario}, {"$set": {'intentos': intentos}})
 
-                    salida = csv.writer(escribir)
+    def Juego(self, activar):
 
-                    salida.writerow(['opcion', 'score'])
+        if activar == 'activar':
 
-                    salida.writerow([(opcion), (score)])
+            for llave, valor in self.opcionesDicc:
 
-                    # del salida
-                    escribir.close()
+                if llave == self.randomOpcion:
+
+                    return resultado, premio, puntuacionTotal, intentos
+            
+
+
+

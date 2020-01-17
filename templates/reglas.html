@@ -39,7 +39,7 @@ REGLAS RULETA
 
                     <!--PNG signo-->
 
-                    <div class="contenedorimagenes">
+     
 
                     {% for opcion in opcionesFijas %}
 
@@ -51,7 +51,6 @@ REGLAS RULETA
 
                     {% endfor %}
 
-                    </div>
 
 
                     <br>
@@ -62,6 +61,18 @@ REGLAS RULETA
 
 
           <button class="button is-primary"><a href="{{ url_for('opciones') }}">RELLENA LAS SIGUIENTES OPCIONES</a></button>
+
+          <!--Volver a Home-->
+
+          <br>
+
+
+
+<form action="{{ url_for('home') }}" method="post">
+
+    <button type="submit">VOLVER A HOME</button>
+    
+    </form>
 
     
     </div>
