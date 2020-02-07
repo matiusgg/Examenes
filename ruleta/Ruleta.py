@@ -10,7 +10,7 @@ import csv
 
 class Ruleta():
 
-    def __init__(self, collection, usuario):
+    def __init__(self, collection, usuario, usuario_id):
 
         # * Diccionario Opciones
 
@@ -44,28 +44,53 @@ class Ruleta():
         self.usuario = usuario
 
         #* random resultado
-        self.randomOpcion = random.choice(self.OPCIONES)
+        # self.randomOpcion = random.choice(self.OPCIONES)
+
+        #* usuario_id
+        self.usuario_id = usuario_id
 
     #*************************************
 
-    def definirIntentos(self, intento):
+    def Intentos(self, intentos):
 
         if intentos == 7:
 
-
             registrarIntentos = self.collection.update_one({'usuario': self.usuario}, {"$set": {'intentos': intentos}})
+            
+            mensaje = f'Se han agregado el tipo de intentos, en este caso es el siguiente: {intentos}'
+
+            return mensaje
 
         if intentos == 'infinito':
 
             registrarIntentos = self.collection.update_one({'usuario': self.usuario}, {"$set": {'intentos': intentos}})
+            
+            mensaje = f'Se han agregado el tipo de intentos, en este caso es el siguiente: {intentos}'
+
+            return mensaje
 
     def Juego(self, activar):
 
         if activar == 'activar':
 
+            #* lista con las opciones que ha escogido el usuario en MONGODB
+            listaOpciones = []
+
+            opcionesUsuario = self.collection.find({'usuario_id': self.usuario_id})
+
+            for i in list(opcionesUsuario):
+
+                listaOpciones.append(i['opcionesUsuarios'])
+
+            print(listaOpciones)
+            
+            randomOpcion = random.choice(listaOpciones)
+
             for llave, valor in self.opcionesDicc:
 
-                if llave == self.randomOpcion:
+                if llave == randomOpcion:
+
+
 
                     return resultado, premio, puntuacionTotal, intentos
             

@@ -92,17 +92,23 @@ def usuariodatos():
     for i in leer_usuario:
 
         print(i['usuario'])
-        listaUsuarioCorrecto.append(i['usuario'])
+        listaUsuarioCorrecto.extend([i['usuario'], str(i['_id'])])
 
     # print(listaUsuarioCorrecto[0])
 
     if listaUsuarioCorrecto != []:
 
         if listaUsuarioCorrecto[0] == usuario:
+
+            registrar_id_usuario = collectionUsuarios.update_one({'usuario': f'{usuario}'}, {'$set': {'evento_id': listaUsuarioCorrecto[1]}})
+
+
             # * iniciar sesion
             # * Limpiamos la session cada vez que haga una nueva session.
             session.clear()
             session['usuario'] = usuario
+            session['usuario_id'] = listaUsuarioCorrecto[1]
+
             print('session creada')
 
             return redirect(url_for('reglas'))
@@ -141,7 +147,7 @@ def registroDatos():
 
             return render_template('registro.html', usuario_existe=True)
 
-        collectionUsuarios.insert_one({"usuario": usuario})
+        collectionUsuarios.insert_one({"usuario": usuario, })
 
         return redirect(url_for('usuario'))
 
@@ -155,6 +161,24 @@ def reglas():
 
     opcionesFijas = ['dinero', 'pierdes', 'carcel']
 
+    usuario = session['usuario']
+
+    #???????????????????????????????????????????????
+
+    for opcion in opcionesFijas:
+
+        queryOpciones = collectionUsuarios.find({'usuario': usuario, f'opcionesUsuarios.{opcion}': opcion})
+        
+
+        if list(queryOpciones) == []:
+
+            agregarOpcion = collectionUsuarios.update_one({'usuario': usuario}, {"$set": {f'opcionesUsuarios.{opcion}': opcion}})
+
+            print('Se ha agregado la nueva opción')
+
+        else:
+            print('''Ya se encuentra esta opcion agregada''')
+
     return render_template('reglas.html', opcionesFijas=opcionesFijas)
 
 # *****************************************
@@ -163,7 +187,7 @@ def reglas():
 @app.route('/opciones')
 def opciones():
 
-    opcionesUsuario = ['dinero', 'saltar', 'coche', 'ordenador', 'nevera', 'moto', 'bote', 'bicicleta']
+    opcionesUsuario = ['saltar', 'coche', 'ordenador', 'nevera', 'moto', 'bote', 'bicicleta']
 
     return render_template('opciones.html', opcionesUsuario=opcionesUsuario)
 
@@ -216,10 +240,10 @@ def llegadaIntentos():
     intento = request.form['intento']
 
     # Objeto
-    ruletaObj = Ruleta(collectionUsuarios, session['usuario'], intento)
+    ruletaObj = Ruleta(collectionUsuarios, session['usuario'], session['usuario_id'])
 
     #* metodo intentos
-    registrarIntentos = ruletaObj.intentos(intento)
+    metodoIntentos = ruletaObj.Intentos(intento)
 
     # * Redireccion a la ruta 'RULETA'
     return redirect(url_for('ruleta'))
@@ -231,7 +255,7 @@ def llegadaIntentos():
 def ruleta():
 
     #* Nuevo objeto para activar el juego
-    ruletaObj = Ruleta(collectionUsuarios, session['usuario'])
+    ruletaObj = Ruleta(collectionUsuarios, session['usuario'], session['usuario_id'])
 
     #* metodo Juego
     activarJuego = ruletaObj.Juego(activar)
@@ -262,3 +286,9 @@ def page_no_found(error):
 if __name__ == "__main__":
 
     app.run('0.0.0.0', '5000', debug=True)
+
+
+
+# {% set pngOpcion = 'img/' + opcion + '.png' %}
+
+# <img src="{{ url_for('static', filename=pngOpcion)}}" alt="">

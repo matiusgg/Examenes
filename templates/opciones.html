@@ -40,13 +40,15 @@ OPCIONES USUARIO
 
     <h3 class="title is-5">{{ opcion }}</h3>
 
-    {% set pngOpcion = 'img/' + opcion + '.png' %}
+
 
     <form action="{{ url_for('opciones') }}" method="post">
 
         <button type="submit">
     
-            <img src="{{ url_for('static', filename=pngOpcion)}}" alt="" class="pngopcion">
+            
+
+            {{ opcion}}
 
             <input type="hidden" name="opcion" value="{{ opcion }}">
 
