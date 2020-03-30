@@ -1,0 +1,24 @@
+# Numero de la version
+version: "3"
+
+# Contenedores= Servicios
+services:
+    # Carpeta donde esta la imagen
+    app:
+        build: .
+        image: appsorteo
+        container_name: contenedorsorteo
+        ports: 
+            #* Cuando coloques el "docker-compose up" y nos salga la URl del navegador, tenemos que usar el puerto externo
+            #* es decir, en este caso el 7700
+            - "8287:5000"
+        #* Si el ordenador no permite crear los volumenes por tema de permisos, pon en comentarios los "volumes"
+        volumes: 
+            - ./src:/app
+            C:/Users/Mateo/Documents/PYTHON/EXAMENES/examen_m4_c3_mateo/src:/app
+
+
+    # basededatos:
+    #     image: mongo
+
+    #* NOTA: SI QUIERES VER LOS PASOS MÁS DETALLADOS SOBRE LOS COMANDOS VE A LOS APUNTES DEL DIA ENERO 05/2020.

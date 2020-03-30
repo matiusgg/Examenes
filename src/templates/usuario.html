@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+
+{% block header %}
+
+
+
+{% endblock %}
+
+<!-- ***************************************************-->
+
+{% block main %}
+
+
+
+<div class="contenedor">
+
+<h1>INGRESA TU EMAIL</h1>
+
+<form action="{{ url_for('usuario') }}" method="post">
+
+
+    <!--oooooooooooooooooooooooooooooooooooooooooooooooo-->
+
+    <label for="email">
+        EMAIL
+    </label>
+
+    <input type="email" name="email" required>
+
+    <br>
+
+    <!--oooooooooooooooooooooooooooooooooooooooooooooooo-->
+
+    <br>
+
+
+    <button type="submit">INGRESA Y COMIENZA A PARTICIPAR</button>
+
+</form>
+
+
+{% if no_email == True %}
+
+<h1>  NO SE HA ENCONTRADO NINGÚN EMAIL, VUELVE A INTENTARLO, O REGISTRATE:</h1>
+
+<br>
+
+<a href="{{ url_for('registro') }}">REGISTRATE</a>
+
+
+
+
+{% endif %}
+
+<br>
+
+<br>
+
+
+
+
+<form action="{{ url_for('home') }}" method="GET">
+
+    <button type="submit">VOLVER A HOME</button>
+    
+    </form>
+
+</div>
+
+
+{% endblock %}

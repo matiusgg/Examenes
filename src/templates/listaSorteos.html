@@ -1,0 +1,311 @@
+{% extends 'layout.html' %}
+
+{% block header %}
+
+
+
+{% endblock %}
+
+<!-- ***************************************************-->
+
+{% block main %}
+
+<div class="contenedor">
+
+<h1>HOLA PARTICIPANTE!!!! ESTAS SON LAS LISTAS DE LOS SORTEOS ESTE MES!!!</h1>
+
+<br>
+<br>
+
+<h1>---------------------------</h1>
+
+<h1>IMPORTANTE:</h1>
+
+{% for llave, valor in mensaje.items() %}
+
+    {% if llave == 'sorteo1' %}
+
+        {% if valor[0] == True %}
+
+            <h1>{{ valor[1] }}</h1>
+
+        {% else %}
+
+            <h1>{{ valor[1] }}</h1>
+
+        {% endif %}
+
+    {% endif %}
+
+    {% if llave == 'sorteo2' %}
+
+        {% if valor[0] == True %}
+
+            <h1>{{ valor[1] }}</h1>
+
+        {% else %}
+
+            <h1>{{ valor[1] }}</h1>
+
+        {% endif %}
+
+    {% endif %}
+
+    {% if llave == 'sorteo3' %}
+
+        {% if valor[0] == True %}
+
+            <h1>{{ valor[1] }}</h1>
+
+        {% else %}
+
+            <h1>{{ valor[1] }}</h1>
+
+        {% endif %}
+
+    {% endif %}
+
+    {% if llave == 'sorteo4' %}
+
+        {% if valor[0] == True %}
+
+            <h1>{{ valor[1] }}</h1>
+
+        {% else %}
+
+            <h1>{{ valor[1] }}</h1>
+
+        {% endif %}
+
+    {% endif %}
+
+ {% if llave == 'msg' %}
+
+ <h1>{{ valor }}</h1>
+
+ {% endif %}
+
+{% endfor %}
+
+<br>
+
+<h1>EL SORTEO 4, ES ESTA EL DIA 28 DE LA ULTIMA SEMANA DEL MES, ESTO ES DEBIDO A QUE SI HAY PLAZO HASTA EL 29, 30, 31 DIAS. eL MES
+    DE FEBRERO NO PODRÍA ENTRAR. POR LO CUAL SI ESTAS EN ALGUNO DE ESOS 3 DÍAS, NO PODRÁS PARTICIPAR EN NINGÚN SORTEO
+</h1>
+
+<h1>---------------------------</h1>
+
+{% if listaSorteos != [] %}
+
+
+{% for i in listaSorteos %}
+
+    <!--?????????????????????????????????????????????????????????-->
+
+    <br>
+
+    <br>
+
+    <h1>********************************************************</h1>
+
+    <h1>PLAZOS DEL SORTEO SEMANA1</h1>
+
+    <h1> FECHA INICIO: {{ i['sorteos']['sorteo1']['plazo'][0] }}</h1>
+    <br>
+    <h1> FECHA FINAL: {{ i['sorteos']['sorteo1']['plazo'][1] }}</h1>
+
+    <br>
+
+    <h1> PREMIO DEL SORTEO: {{ i['sorteos']['sorteo1']['premio'] }}</h1>
+
+    <br>
+
+    <br>
+
+    {% if participacion == True %}
+    <form action="{{ url_for('sorteo') }}" method="post">
+    
+        <input type="hidden" name="participar" value="{{i['sorteo_id']}}">
+
+        <input type="hidden" name="semana" value="{{ i['sorteos']['sorteo1']['plazo'][0] }}/{{ i['sorteos']['sorteo1']['plazo'][1] }}">
+    
+        <button type="submit">PARTICIPAR</button>
+                
+        </form>
+
+    {% else %}
+
+    <h1>Ya no puedes participar en este sorteo</h1>
+
+    {% endif %}
+
+
+    <!--?????????????????????????????????????????????????????????-->
+
+    <!--?????????????????????????????????????????????????????????-->
+
+    <br>
+
+    <br>
+
+    <h1>********************************************************</h1>
+
+    <h1>PLAZOS DEL SORTEO SEMANA 2</h1>
+
+    <h1> FECHA INICIO: {{ i['sorteos']['sorteo2']['plazo'][0] }}</h1>
+    <br>
+    <h1> FECHA FINAL: {{ i['sorteos']['sorteo2']['plazo'][1] }}</h1>
+
+    <br>
+
+
+    <h1> PREMIO DEL SORTEO: {{ i['sorteos']['sorteo2']['premio'] }}</h1>
+
+    <br>
+
+
+
+    {% if participacion == True %}
+    <form action="{{ url_for('sorteo') }}" method="post">
+    
+        <input type="hidden" name="participar" value="{{i['sorteo_id']}}">
+
+        <input type="hidden" name="semana" value="{{ i['sorteos']['sorteo2']['plazo'][0] }}/{{ i['sorteos']['sorteo2']['plazo'][1] }}">
+    
+        <button type="submit">PARTICIPAR</button>
+                
+        </form>
+
+        {% else %}
+
+    <h1>Ya no puedes participar en este sorteo</h1>
+
+    {% endif %}
+
+    <!--?????????????????????????????????????????????????????????-->
+
+    <br>
+
+    <br>
+
+    <h1>********************************************************</h1>
+
+    <h1>PLAZOS DEL SORTEO SEMANA 3</h1>
+
+    <h1> FECHA INICIO: {{ i['sorteos']['sorteo3']['plazo'][0] }}</h1>
+    <br>
+    <h1> FECHA FINAL: {{ i['sorteos']['sorteo3']['plazo'][1] }}</h1>
+
+    <br>
+
+    <h1> PREMIO DEL SORTEO: {{ i['sorteos']['sorteo3']['premio'] }}</h1>
+
+    <br>
+
+
+
+    {% if participacion == True %}
+    <form action="{{ url_for('sorteo') }}" method="post">
+    
+        <input type="hidden" name="participar" value="{{i['sorteo_id']}}">
+
+        <input type="hidden" name="semana" value="{{ i['sorteos']['sorteo3']['plazo'][0] }}/{{ i['sorteos']['sorteo3']['plazo'][1] }}">
+    
+        <button type="submit">PARTICIPAR</button>
+                
+        </form>
+
+        
+
+        {% else %}
+
+        <h1>Ya no puedes participar en este sorteo</h1>
+    
+        {% endif %}
+
+    <!--?????????????????????????????????????????????????????????-->
+
+    <br>
+
+    <br>
+
+    <h1>********************************************************</h1>
+
+    <h1>PLAZOS DEL SORTEO SEMANA 4</h1>
+
+    <h1> FECHA INICIO: {{ i['sorteos']['sorteo4']['plazo'][0] }}</h1>
+    <br>
+    <h1> FECHA FINAL: {{ i['sorteos']['sorteo4']['plazo'][1] }}</h1>
+
+    <br>
+
+    <h1> PREMIO DEL SORTEO: {{ i['sorteos']['sorteo4']['premio'] }}</h1>
+
+    <br>
+
+
+    {% if participacion == True %}
+<form action="{{ url_for('sorteo') }}" method="post">
+
+    <input type="hidden" name="participar" value="{{i['sorteo_id']}}">
+
+    <input type="hidden" name="semana" value="{{ i['sorteos']['sorteo4']['plazo'][0] }}/{{ i['sorteos']['sorteo4']['plazo'][1] }}">
+
+    <button type="submit">PARTICIPAR</button>
+            
+    </form>
+
+    {% else %}
+
+    <h1>Ya no puedes participar en este sorteo</h1>
+
+    {% endif %}
+
+    <br>
+    
+    <h1>**********************************************************************</h1>
+
+    <br>
+
+    <h1>Pero si estas en los días: 29, 30, 31. Puedes probar como funciona la participación</h1>
+
+<br>
+
+
+<form action="{{ url_for('sorteo') }}" method="post">
+
+    <input type="hidden" name="participar" value="{{i['sorteo_id']}}">
+
+    <input type="hidden" name="semana" value="2020-03-29/2020-03-31">
+
+    <button type="submit">PARTICIPAR</button>
+            
+    </form>
+
+{% endfor %}
+
+{% else %}
+
+<h1>Puedes comprobar en home si se han agregado</h1>
+
+{% endif%}
+
+
+<br>
+
+<!--??????????????????????????????????????????????????????-->
+
+
+
+<br>
+
+<h1>********************************************************</h1>
+
+<form action="{{ url_for('home') }}" method="GET">
+
+    <button type="submit">VOLVER A HOME</button>
+            
+    </form>
+</div>
+
+{% endblock %}
