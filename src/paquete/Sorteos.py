@@ -29,7 +29,7 @@ class Sorteos():
 
         #* email_id, lo usarmeos para las querys de mongoDB
         self.email_id = email_id
-        
+
     def listaSorteos(self, actualizarFechaSorteo):
 
         #* Fecha actual
@@ -198,6 +198,8 @@ class Sorteos():
                 #* Este return solo funcionará cuando estemos en un nuevo mes, y el metodo agregue los sorteos actualizados del mes actual
                 #* en el que estemos, ya que si ya fue agregado, hará el return anterior, es decir este: return f'Ya existen sorteos de este mes {mesActual}'
                 return {'msg': f'Se han agregado los sorteos del mes: {mesActual}'}, [], None
+
+
 
     def sorteo(self, participar, semana):
 
