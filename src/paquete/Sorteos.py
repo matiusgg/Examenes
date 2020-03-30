@@ -29,9 +29,7 @@ class Sorteos():
 
         #* email_id, lo usarmeos para las querys de mongoDB
         self.email_id = email_id
-
-
-
+        
     def listaSorteos(self, actualizarFechaSorteo):
 
         #* Fecha actual
