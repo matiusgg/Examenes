@@ -199,8 +199,6 @@ class Sorteos():
                 #* en el que estemos, ya que si ya fue agregado, hará el return anterior, es decir este: return f'Ya existen sorteos de este mes {mesActual}'
                 return {'msg': f'Se han agregado los sorteos del mes: {mesActual}'}, [], None
 
-
-
     def sorteo(self, participar, semana):
 
         agregarParticipante = self.collection.update_one({'email_id': self.email_id}, {'$set': {'sorteo_id': participar}})
