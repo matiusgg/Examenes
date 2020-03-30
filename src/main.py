@@ -255,9 +255,9 @@ def listaSorteosDatos():
     objSorteos = Sorteos(collectionSorteos, session['email'], session['email_id'])
 
     #* metodo para agregar sorteos
-    (mensaje, listaConSorteos, condicionarparticipacion) = objSorteos.listaSorteos(actualizarFechasSorteos)
+    (mensaje, listaConSorteos, condicionarparticipacion, semanas) = objSorteos.listaSorteos(actualizarFechasSorteos)
 
-
+    session['semanas'] = semanas
     
     return render_template('listaSorteos.html', mensaje=mensaje, listaSorteos=listaConSorteos, participacion=condicionarparticipacion)
 
@@ -296,7 +296,7 @@ def sorteoDatos():
     objSorteos = Sorteos(collectionEmail, session['email'], session['email_id'])
 
     #* metodo para agregar sorteos
-    (mensaje, listaUsuarios) = objSorteos.sorteo(participar, semana)
+    (mensaje, listaUsuarios) = objSorteos.sorteo(participar, semana, session['semanas'])
 
     return render_template('sorteo.html', mensaje=mensaje, usuarios=listaUsuarios)
 

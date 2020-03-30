@@ -65,6 +65,16 @@ class Sorteos():
                 }
             }
 
+            #* Semanas que nos ayudarán para el sorteo
+            semana1 = f'{anyoActual}-{mesActual}-1/{anyoActual}-{mesActual}-7'
+            semana2 = f'{anyoActual}-{mesActual}-8/{anyoActual}-{mesActual}-15'
+            semana3 = f'{anyoActual}-{mesActual}-16/{anyoActual}-{mesActual}-23'
+            semana4 = f'{anyoActual}-{mesActual}-24/{anyoActual}-{mesActual}-28'
+            ultimosDias = f'{anyoActual}-{mesActual}-29/{anyoActual}-{mesActual}-31'
+
+            #* Lista que contendrá está información delas fechas de los plazos de los sorteos
+            semanas = [semana1, semana2, semana3, semana4, ultimosDias]
+
             # #* diccionario que nos servirá para hacer la busqueda de mongoDB en la variable "buscarSorteos"
             buscarDicc = {
                 'sorteos.sorteo1.plazo': [f'{anyoActual}-{mesActual}-1', f'{anyoActual}-{mesActual}-7']
@@ -176,7 +186,7 @@ class Sorteos():
 
                     condicionarParticipar = False
 
-                return {'sorteo1': sorteo1, 'sorteo2': sorteo2, 'sorteo3': sorteo3, 'sorteo4': sorteo4}, listaConSorteos, condicionarParticipar
+                return {'sorteo1': sorteo1, 'sorteo2': sorteo2, 'sorteo3': sorteo3, 'sorteo4': sorteo4}, listaConSorteos, condicionarParticipar, semanas
 
             else:
 
@@ -197,9 +207,9 @@ class Sorteos():
 
                 #* Este return solo funcionará cuando estemos en un nuevo mes, y el metodo agregue los sorteos actualizados del mes actual
                 #* en el que estemos, ya que si ya fue agregado, hará el return anterior, es decir este: return f'Ya existen sorteos de este mes {mesActual}'
-                return {'msg': f'Se han agregado los sorteos del mes: {mesActual}'}, [], None
+                return {'msg': f'Se han agregado los sorteos del mes: {mesActual}'}, [], None, semanas
 
-    def sorteo(self, participar, semana):
+    def sorteo(self, participar, semana, listasemanas):
 
         agregarParticipante = self.collection.update_one({'email_id': self.email_id}, {'$set': {'sorteo_id': participar}})
 
@@ -223,9 +233,26 @@ class Sorteos():
 
         all_users = self.collection.find({})
 
-        for i in list(all_users):
+        for user in list(all_users):
 
-            listaTodosUsuarios.append(i)
+            for llave, valor in user.items():
+
+                if llave == 'sorteoSemana':
+
+                    for sem in listasemanas:
+
+                        if llave == sem:
+
+                            listaTodosUsuarios.append(valor)
+
+                        else:
+
+                            print('Aún no hay usuario inscritos en este sorteo')
+                
+                if llave == 'email':
+
+                    listaTodosUsuarios.append(valor)
+
 
         print(listaTodosUsuarios)
 
