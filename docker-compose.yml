@@ -6,7 +6,7 @@ services:
     # Carpeta donde esta la imagen
     app:
         build: .
-        image: appsorteo
+        image: appsorteo:v1.1
         container_name: contenedorsorteo
         ports: 
             #* Cuando coloques el "docker-compose up" y nos salga la URl del navegador, tenemos que usar el puerto externo
@@ -15,7 +15,6 @@ services:
         #* Si el ordenador no permite crear los volumenes por tema de permisos, pon en comentarios los "volumes"
         volumes: 
             - ./src:/app
-            C:/Users/Mateo/Documents/PYTHON/EXAMENES/examen_m4_c3_mateo/src:/app
 
 
     # basededatos:
